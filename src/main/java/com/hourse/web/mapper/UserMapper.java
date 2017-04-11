@@ -15,11 +15,7 @@ import java.util.List;
 @Repository(value = "userMapper")
 public interface UserMapper {
     @Select(value = "${sql}")
-    @Results(value = { @Result(id = true, property = "id", column = "id"),
-            @Result(property = "parentId", column = "c_parent_id"),
-            @Result(property = "url", column = "c_url"),
-            @Result(property = "isShowLeft", column = "c_is_show_left"),
-            @Result(property = "name", column = "c_name") })
+    @Results(value = { @Result(id = true, property = "hourseId", column = "hourseId")})
     List operateReturnBeans(@Param(value = "sql") String sql);
 
 }
