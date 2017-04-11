@@ -15,7 +15,8 @@ import java.util.List;
 @Service(value = "iUserService")
 @Transactional
 public class UserServiceImpl implements IUserService {
-    @Resource(name = "menuMapper")
+
+    @Resource(name = "userMapper")
     private UserMapper userMapper;
 
     public List getUserById(int userId) {

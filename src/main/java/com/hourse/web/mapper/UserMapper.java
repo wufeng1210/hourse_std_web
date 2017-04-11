@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by dell on 2017/4/11.
  */
-@Repository(value = "menuMapper")
+@Repository(value = "userMapper")
 public interface UserMapper {
     @Select(value = "${sql}")
     @Results(value = { @Result(id = true, property = "id", column = "id"),
@@ -22,5 +22,4 @@ public interface UserMapper {
             @Result(property = "name", column = "c_name") })
     List operateReturnBeans(@Param(value = "sql") String sql);
 
-    User get();
 }
