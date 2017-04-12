@@ -29,7 +29,9 @@ public class LoginController {
 
     @ResponseBody
     @RequestMapping("getUser")
-    public List<User> getUser(){
-        return iUserService.getUserById();
+    public Object getUser(){
+        Object a =iUserService.getUserById(1);
+        System.out.println(a);
+        return null;
     }
 }

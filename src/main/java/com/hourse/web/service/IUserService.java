@@ -5,5 +5,5 @@ import com.hourse.web.model.User;
 import java.util.List;
 
 public interface IUserService {
-    public List<User> getUserById();
+    public Object getUserById(int userId);
 }
