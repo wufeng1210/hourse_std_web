@@ -32,7 +32,6 @@ public class LoginController {
     @RequestMapping("getUser")
     public Object getUser(){
         List<Hourse> a =iUserService.getUserById(1);
-        System.out.println(a);
-        return null;
+        return a;
     }
 }
