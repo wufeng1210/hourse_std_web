@@ -30,6 +30,6 @@ public class LoginController {
     @ResponseBody
     @RequestMapping("getUser")
     public List<User> getUser(){
-        return iUserService.getUserById(1);
+        return iUserService.getUserById();
     }
 }
