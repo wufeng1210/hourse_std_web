@@ -1,6 +1,7 @@
 package com.hourse.web.service.impl;
 
 import com.hourse.web.mapper.UserMapper;
+import com.hourse.web.model.Hourse;
 import com.hourse.web.model.User;
 import com.hourse.web.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements IUserService {
     @Resource(name = "userMapper")
     private UserMapper userMapper;
 
-    public Object getUserById(int userId) {
+    public List<Hourse> getUserById(int userId) {
         String sql = "select * from hourse_info";
         return  userMapper.operateReturnBeans(sql);
     }

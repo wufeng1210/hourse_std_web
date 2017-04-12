@@ -1,5 +1,6 @@
 package com.hourse.web.controller;
 
+import com.hourse.web.model.Hourse;
 import com.hourse.web.model.User;
 import com.hourse.web.service.IUserService;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class LoginController {
     @ResponseBody
     @RequestMapping("getUser")
     public Object getUser(){
-        Object a =iUserService.getUserById(1);
+        List<Hourse> a =iUserService.getUserById(1);
         System.out.println(a);
         return null;
     }
