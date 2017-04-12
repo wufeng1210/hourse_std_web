@@ -165,6 +165,14 @@
     </dependency>
 
 
+    <!-- jackson start -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.5.4</version>
+    </dependency>
+    <!-- jackson end -->
+
     <!-- 格式化对象，方便输出日志 -->
     <dependency>
       <groupId>com.alibaba</groupId>
