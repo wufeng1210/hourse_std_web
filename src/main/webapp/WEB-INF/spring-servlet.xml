@@ -21,12 +21,39 @@
     <mvc:resources location="/page/" mapping="/page/**"/>
 
 
-    <!-- 视图渲染 jsp/freemaker/velocity-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!-- 制定页面存放的路径 -->
+    <!-- 视图渲染 配置jsp视图解析器-->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        &lt;!&ndash; 制定页面存放的路径 &ndash;&gt;
         <property name="prefix" value="/page/"></property>
-        <!-- 文件的后缀 -->
-        <property name="suffix" value=".ftl"></property>
+        &lt;!&ndash; 文件的后缀 &ndash;&gt;
+        <property name="suffix" value=".jsp"></property>
+    </bean>-->
+    <!-- 视图渲染 配置freeMarker视图解析器 -->
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="cache" value="true" />
+        <property name="suffix" value=".ftl" />
+        <property name="order" value="0"/>
+    </bean>
+
+    <!-- 配置freeMarker的模板路径 -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/page/"/>
+
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">3600</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="number_format">#.##</prop>
+            </props>
+        </property>
     </bean>
     <!--@ResponseBody标注配置转换的bean-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">

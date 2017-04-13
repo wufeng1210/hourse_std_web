@@ -179,7 +179,12 @@
       <artifactId>fastjson</artifactId>
       <version>1.1.41</version>
     </dependency>
-
+    <!-- freemarker-->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.20</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>hourse_std_web</finalName>
