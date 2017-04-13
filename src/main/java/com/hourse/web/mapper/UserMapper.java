@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * Created by dell on 2017/4/11.
  */
-@Repository(value = "userMapper")
+@Repository
 public interface UserMapper {
-    @Select(value = "${sql}")
-    List<Hourse> operateReturnBeans(@Param(value = "sql") String sql);
+    @Select("select hourseId from hourse_info where hourseId = #{hourseId}")
+    List<Hourse> getUserInfo(Hourse hourse);
 
 }

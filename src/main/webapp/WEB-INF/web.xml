@@ -32,7 +32,7 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <!-- 如果是监听多个文件，可用‘，’隔开 -->
-    <param-value>WEB-INF/applicationContext.xml</param-value>
+    <param-value>WEB-INF/applicationContext.xml,WEB-INF/mybatis-config.xml</param-value>
   </context-param>
   <!--Spring监听器 ApplicationContext 载入 -->
   <listener>

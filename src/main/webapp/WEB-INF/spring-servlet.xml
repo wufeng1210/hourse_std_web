@@ -26,7 +26,7 @@
         <!-- 制定页面存放的路径 -->
         <property name="prefix" value="/page/"></property>
         <!-- 文件的后缀 -->
-        <property name="suffix" value=".jsp"></property>
+        <property name="suffix" value=".ftl"></property>
     </bean>
     <!--@ResponseBody标注配置转换的bean-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -43,4 +43,5 @@
             </list>
         </property>
     </bean>
+
 </beans>
