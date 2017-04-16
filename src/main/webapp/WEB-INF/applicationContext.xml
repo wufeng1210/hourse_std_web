@@ -15,6 +15,14 @@
     <!-- 引入jdbc配置文件 -->
     <context:property-placeholder location="WEB-INF/config/jdbc.properties" system-properties-mode="FALLBACK"/>
 
+    <bean id="PropertiesUtils" class="com.hourse.web.util.PropertiesUtils">
+        <property name="fileList">
+            <list>
+                <value>/hourse/config.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <!--创建jdbc数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">

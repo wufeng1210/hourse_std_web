@@ -24,10 +24,7 @@ public class UserServiceImpl implements IUserService {
     @Resource(name = "userMapper")
     private UserMapper userMapper;
 
-    public List<Hourse> getUserById(int hourseId) {
-
-        Hourse hourse = new Hourse();
-        hourse.setHourseId(hourseId);
-        return  userMapper.getUserInfo(hourse);
+    public List<User> getUserById(User user) {
+        return  userMapper.getUserInfo(user);
     }
 }
