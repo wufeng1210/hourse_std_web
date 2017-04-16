@@ -29,6 +29,7 @@ public class LoginController {
     @Autowired
     private IUserService iUserService;
 
+
     @RequestMapping("index")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("index");
@@ -63,7 +64,7 @@ public class LoginController {
     @RequestMapping()
     public Map<String, Object> getAuth() {
         Map<String, Object> resMap = new HashMap<String, Object>();
-        try {
+        try{
 
         }catch (Exception e){
 
