@@ -197,7 +197,16 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.0</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-excelant</artifactId>
+      <version>3.13</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>3.2-FINAL</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>hourse_std_web</finalName>
