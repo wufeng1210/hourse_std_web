@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface UserAuthMapper {
 
-    @Select("selct * from user_auth where authId = #{authId}")
+    @Select("selct * from user_auth where authId in #{authIds}")
     List<UserAuth> getAuthInfo(UserAuth userAuth);
 }
