@@ -1,6 +1,7 @@
 package com.hourse.web.controller;
 
 import com.hourse.web.model.User;
+import com.hourse.web.model.UserAuth;
 import com.hourse.web.service.IUserAuthService;
 import com.hourse.web.service.IUserService;
 import com.hourse.web.util.CookieUtil;
@@ -38,7 +39,8 @@ public class AuthController {
     public Map<String, Object> getAuth() {
         Map<String, Object> resMap = new HashMap<String, Object>();
         try{
-
+            List<UserAuth> list = userAuthService.getAuthsByParentId("1,2,3");
+            resMap.put("children","list");
         }catch (Exception e){
 
         }

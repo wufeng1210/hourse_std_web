@@ -25,4 +25,8 @@ public class UserAuthServiceImpl implements IUserAuthService {
     public List<UserAuth> getUserAuthById(UserAuth userAuth) {
         return  userAuthMapper.getAuthInfo(userAuth);
     }
+
+    public List<UserAuth> getAuthsByParentId(String authIds) {
+        return  userAuthMapper.getAuthsByParentId(authIds);
+    }
 }

@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface IUserAuthService {
     public List<UserAuth> getUserAuthById(UserAuth userAuth);
+    public List<UserAuth> getAuthsByParentId(String authIds);
 }

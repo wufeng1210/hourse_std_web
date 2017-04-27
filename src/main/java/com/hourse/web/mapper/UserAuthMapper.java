@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface UserAuthMapper {
 
-    @Select("selct * from user_auth where authId in #{authIds}")
+    @Select("select * from user_auth where authId in #{authIds}")
     List<UserAuth> getAuthInfo(UserAuth userAuth);
+
+    @Select("select * from user_auth where authId in (#{authIds})")
+    List<UserAuth> getAuthsByParentId(String authIds);
 }
