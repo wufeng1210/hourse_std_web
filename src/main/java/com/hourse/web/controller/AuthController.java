@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,14 +37,13 @@ public class AuthController {
 
     @ResponseBody
     @RequestMapping()
-    public Map<String, Object> getAuth() {
-        Map<String, Object> resMap = new HashMap<String, Object>();
+    public List<Map<String,Object>> getAuth() {
+        List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
         try{
-            List<UserAuth> list = userAuthService.getAuthsByParentId("1,2,3");
-            resMap.put("children","list");
+            resList = userAuthService.getAuthsByParentId("-1","1");
         }catch (Exception e){
 
         }
-        return resMap;
+        return resList;
     }
 }
