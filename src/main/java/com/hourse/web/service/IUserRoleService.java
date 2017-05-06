@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface IUserRoleService {
     public List<UserRole> getUserRoleById(UserRole userRole);
+    public UserRole getUserRoleByRoleId(int roleId);
 }

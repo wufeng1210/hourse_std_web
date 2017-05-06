@@ -1,6 +1,7 @@
 package com.hourse.web.mapper;
 
 import com.hourse.web.model.UserRole;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,7 @@ public interface UserRoleMapper {
 
     @Select("select * from user_info where roleId = #{roleId}")
     List<UserRole> getRoleInfo(UserRole userRole);
+
+    @Select("select * from user_role where roleId = #{roleId}")
+    UserRole getUserRoleByRoleId(@Param("roleId")int  roleId);
 }
