@@ -204,7 +204,7 @@
     <ul id="tree" class="easyui-tree"></ul>
 </div>
 <div region="south" style="height: 25px; padding: 5px;" align="center">
-    欢迎:</div>
+    欢迎:${userInfo.userName}</div>
 <div id="dlg" class="easyui-dialog"
      style="width: 400px; height: 220px; padding: 10px 20px" closed="true"
      buttons="#dlg-buttons" data-options="iconCls:'icon-modifyPassword'">

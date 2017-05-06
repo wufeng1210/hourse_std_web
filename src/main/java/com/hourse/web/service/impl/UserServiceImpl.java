@@ -27,4 +27,11 @@ public class UserServiceImpl implements IUserService {
     public List<User> getUserById(User user) {
         return  userMapper.getUserInfo(user);
     }
+
+    public List<User> find(User user) {
+        return  userMapper.find(user);
+    }
+    public int count(User user) {
+        return  userMapper.count(user);
+    }
 }
