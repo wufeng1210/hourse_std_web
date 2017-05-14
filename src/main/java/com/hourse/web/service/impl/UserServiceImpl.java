@@ -34,4 +34,16 @@ public class UserServiceImpl implements IUserService {
     public int count(User user) {
         return  userMapper.count(user);
     }
+
+    public int save(User user) {
+        return  userMapper.save(user);
+    }
+
+    public int update(User user) {
+        return  userMapper.update(user);
+    }
+
+    public int delete(String userIds) {
+        return  userMapper.delete(userIds);
+    }
 }

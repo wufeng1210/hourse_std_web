@@ -5,6 +5,7 @@ import com.hourse.web.model.UserRole;
 import com.hourse.web.service.IUserAuthService;
 import com.hourse.web.service.IUserRoleService;
 import com.hourse.web.service.IUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,28 +32,70 @@ public class UserController {
 
 
 
-    @ResponseBody
     @RequestMapping("userManager")
-    public ModelAndView getuserInfo(User user) {
-        ModelAndView modelAndView = new ModelAndView();
-        try{
-            List<User> userList = userService.find(new User());
-            modelAndView.setViewName("userManager");
-//            modelAndView.addObject("userList",userList);
-        }catch (Exception e){
-
-        }
-        return modelAndView;
+    public String gotoUserManager() {
+        return "userManager";
     }
     @ResponseBody
     @RequestMapping("userList")
-    public Map<String,Object> user(User user) {
+    public Map<String,Object> userList(int userId, String userName) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            List<User> userList = userService.find(new User());
+            User qryUser = new User();
+            qryUser.setUserId(userId);
+            qryUser.setUserName(userName);
+            List<User> userList = userService.find(qryUser);
             int total = userService.count(new User());
             resMap.put("total", total);
             resMap.put("rows",userList);
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("saveOrUpdateUser")
+    public Map<String,Object> saveUser(int userId, String userName) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            int saveNums = 0;
+            User opUser = new User();
+            opUser.setUserId(userId);
+            opUser.setUserName(userName);
+//            opUser.setUserPassWord(user_pass_word);
+            if( -1 != userId){
+                saveNums=userService.update(opUser);
+            }else{
+                saveNums=userService.save(opUser);
+            }
+            if(saveNums>0){
+                resMap.put("success", true);
+
+            }else{
+                resMap.put("success", false);
+                resMap.put("errorMsg", "保存失败");
+            }
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteUser")
+    public Map<String,Object> deleteUser(User user,String delIds) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            int delNums = 0;
+            delNums=userService.delete(delIds);
+            if(delNums>0){
+                resMap.put("success", true);
+                resMap.put("delNums", delNums);
+            }else{
+                resMap.put("success", false);
+                resMap.put("errorMsg", "删除失败");
+            }
         }catch (Exception e){
 
         }

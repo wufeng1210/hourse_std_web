@@ -6,7 +6,10 @@ import com.hourse.web.model.User;
 import java.util.List;
 
 public interface IUserService {
-    public List<User> getUserById(User user);
-    public List<User> find(User user);
-    public int count(User user);
+    List<User> getUserById(User user);
+    List<User> find(User user);
+    int count(User user);
+    int save(User user);
+    int update(User user);
+    int delete(String userIds);
 }
