@@ -14,6 +14,7 @@
 <script type="text/javascript">
     function searchUser(){
         $("#dia").datagrid('load',{
+            userId:-1,
             userName:$("#userName").val()
         });
     }
@@ -34,7 +35,7 @@
         //alert(row.Userid);
         url="/saveOrUpdateUser.do?userId="+row.userId;
     }
-    //保存产品
+    //保存用户
     function saveUser(){
 
         $("#fm").form("submit",{
@@ -98,7 +99,7 @@
 </head>
 <body style="margin:1px;">
 <table id="dia" class="easyui-datagrid" title="用户表" style="width:1150px;height:470px" toolbar="#tb"
-       url="/userList.do" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
+       url="/userList.do?userId=-1" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
        fit="true" idField="id">
     <thead data-options="frozen:true">
     <tr>

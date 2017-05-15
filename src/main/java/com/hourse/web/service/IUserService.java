@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface IUserService {
     List<User> getUserById(User user);
-    List<User> find(User user);
+
+    List<User> queryList(User user);
     int count(User user);
     int save(User user);
     int update(User user);

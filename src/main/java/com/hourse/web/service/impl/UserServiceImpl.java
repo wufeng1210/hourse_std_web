@@ -28,8 +28,8 @@ public class UserServiceImpl implements IUserService {
         return  userMapper.getUserInfo(user);
     }
 
-    public List<User> find(User user) {
-        return  userMapper.find(user);
+    public List<User> queryList(User user) {
+        return  userMapper.queryList(user);
     }
     public int count(User user) {
         return  userMapper.count(user);

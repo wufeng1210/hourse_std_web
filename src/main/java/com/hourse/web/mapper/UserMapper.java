@@ -4,6 +4,7 @@ import com.hourse.web.model.User;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +18,9 @@ public interface UserMapper {
     @Select("select * from user_info where userName = #{userName} and userPassWord = #{userPassWord}")
     List<User> getUserInfo(User user);
 
-    @Select("select * from user_info")
-    List<User> find(User user);
-    @Select("select count(1) from user_info")
+    @SelectProvider(method = "queryList", type = UserProvider.class)
+    List<User> queryList(User user);
+    @SelectProvider(method = "count", type = UserProvider.class)
     int count(User user);
 
     @InsertProvider(method = "save", type = UserProvider.class)

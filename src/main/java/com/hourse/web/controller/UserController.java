@@ -44,8 +44,8 @@ public class UserController {
             User qryUser = new User();
             qryUser.setUserId(userId);
             qryUser.setUserName(userName);
-            List<User> userList = userService.find(qryUser);
-            int total = userService.count(new User());
+            List<User> userList = userService.queryList(qryUser);
+            int total = userService.count(qryUser);
             resMap.put("total", total);
             resMap.put("rows",userList);
         }catch (Exception e){
@@ -56,14 +56,14 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdateUser")
-    public Map<String,Object> saveUser(int userId, String userName) {
+    public Map<String,Object> saveUser(int userId, String userName,String userPassWord) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
             User opUser = new User();
             opUser.setUserId(userId);
             opUser.setUserName(userName);
-//            opUser.setUserPassWord(user_pass_word);
+            opUser.setUserPassWord(userPassWord);
             if( -1 != userId){
                 saveNums=userService.update(opUser);
             }else{
@@ -84,7 +84,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("deleteUser")
-    public Map<String,Object> deleteUser(User user,String delIds) {
+    public Map<String,Object> deleteUser(String delIds) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int delNums = 0;
