@@ -1,6 +1,7 @@
 package com.hourse.web.mapper;
 
 import com.hourse.web.model.User;
+import com.hourse.web.util.SqlProviderUtil;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -10,66 +11,41 @@ public class UserProvider {
 
 	public String queryList(User user){
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select * from user_info where 1=1 ");
+		sql.append(" SELECT * ");
+		sql.append(" FROM user_info WHERE ");
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(user,"userId","roleId"));
 		if(-1 != user.getUserId()){
 			sql.append(" and userId = " + user.getUserId());
 		}
-		if(StringUtils.isNotBlank(user.getUserName())){
-			sql.append(" and userName = " + user.getUserName());
-		}
-		if(StringUtils.isNotBlank(user.getUserType())){
-			sql.append(" and userType = " + user.getUserType());
+		if(0 != user.getRoleId()){
+			sql.append(" and roleId = " + user.getRoleId());
 		}
 		return sql.toString();
 	}
 
 	public String count(User user){
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select count(*) from user_info where 1=1 ");
+		sql.append(" SELECT count(*) ");
+		sql.append(" FROM user_info WHERE ");
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(user,"userId","roleId"));
 		if(-1 != user.getUserId()){
 			sql.append(" and userId = " + user.getUserId());
 		}
-		if(StringUtils.isNotBlank(user.getUserName())){
-			sql.append(" and userName = " + user.getUserName());
-		}
-		if(StringUtils.isNotBlank(user.getUserType())){
-			sql.append(" and userType = " + user.getUserType());
+		if(0 != user.getRoleId()){
+			sql.append(" and roleId = " + user.getRoleId());
 		}
 		return sql.toString();
 	}
 
 	public String save(User user){
-		StringBuffer sql = new StringBuffer();
-		sql.append(" insert into user_info values(null");
-		sql.append(",'" + user.getUserName()+"'");
-		sql.append(",'" + user.getUserPassWord()+"'");
-		sql.append(",'','','1',null,null,null ) ");
-
-		return sql.toString();
+		return SqlProviderUtil.provideInsertNotBlankWithout(user, "user_info","userId");
 	}
 
 	public String update(User user){
-		StringBuffer sql = new StringBuffer();
-		sql.append(" update user_info set");
-		if(StringUtils.isNotBlank(String.valueOf(user.getUserId()))){
-			sql.append(" userId = " + user.getUserId());
-		}
-		if(StringUtils.isNotBlank(user.getUserName())){
-			sql.append(" , ");
-			sql.append(" userName = " + user.getUserName());
-		}
-
-		if(StringUtils.isNotBlank(user.getUserPassWord())){
-			sql.append(" , ");
-			sql.append(" userPassWord = " + user.getUserPassWord());
-		}
-		if(StringUtils.isNotBlank(user.getUserType())){
-			sql.append(" , ");
-			sql.append(" userType = " + user.getUserType());
-		}
-
-		sql.append(" where userId = "+ user.getUserId());
-
+		StringBuffer sql = new StringBuffer(" UPDATE user_info ");
+		sql.append(SqlProviderUtil.provideSetterNotBlank(user));
+		sql.append(" WHERE ");
+		sql.append("userId=#{userId}");
 		return sql.toString();
 	}
 

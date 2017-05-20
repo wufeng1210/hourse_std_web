@@ -64,6 +64,8 @@ public class UserController {
             opUser.setUserId(userId);
             opUser.setUserName(userName);
             opUser.setUserPassWord(userPassWord);
+            opUser.setUserType("0");
+            opUser.setSecretKey(userPassWord);
             if( -1 != userId){
                 saveNums=userService.update(opUser);
             }else{
