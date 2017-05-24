@@ -2,19 +2,15 @@ package com.hourse.web.controller;
 
 import com.hourse.web.model.User;
 import com.hourse.web.model.UserRole;
-import com.hourse.web.service.IUserAuthService;
 import com.hourse.web.service.IUserRoleService;
 import com.hourse.web.service.IUserService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,32 +19,32 @@ import java.util.Map;
  * Created by wufeng on 2017/4/10.
  */
 @Controller
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("role")
+public class RoleController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
-    private IUserService userService;
+    private IUserRoleService userRoleService;
 
 
 
     @RequestMapping("manager")
     public String manager() {
-        return "userManager";
+        return "roleManager";
     }
     @ResponseBody
     @RequestMapping("list")
-    public Map<String,Object> list(int userId, String userName) {
+    public Map<String,Object> list(int roleId, String roleName) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            User qryUser = new User();
-            qryUser.setUserId(userId);
-            qryUser.setUserName(userName);
-            List<User> userList = userService.queryList(qryUser);
-            int total = userService.count(qryUser);
+            UserRole qryUserRole = new UserRole();
+            qryUserRole.setRoleId(roleId);
+            qryUserRole.setRoleName(roleName);
+            List<UserRole> roleList = userRoleService.queryList(qryUserRole);
+            int total = userRoleService.count(qryUserRole);
             resMap.put("total", total);
-            resMap.put("rows",userList);
+            resMap.put("rows",roleList);
         }catch (Exception e){
 
         }
@@ -57,20 +53,19 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(int userId, String userName,String userPassWord) {
+    public Map<String,Object> saveOrUpdate(int roleId, String roleName) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
-            User opUser = new User();
-            opUser.setUserId(userId);
-            opUser.setUserName(userName);
-            opUser.setUserPassWord(userPassWord);
-            opUser.setUserType("0");
-            opUser.setSecretKey(userPassWord);
-            if( -1 != userId){
-                saveNums=userService.update(opUser);
+            UserRole opUserRole = new UserRole();
+            opUserRole.setRoleId(roleId);
+            opUserRole.setRoleName(roleName);
+            opUserRole.setAuthIds("1");
+            opUserRole.setRoleDescription("");
+            if( -1 != roleId){
+                saveNums=userRoleService.update(opUserRole);
             }else{
-                saveNums=userService.save(opUser);
+                saveNums=userRoleService.save(opUserRole);
             }
             if(saveNums>0){
                 resMap.put("success", true);
@@ -91,7 +86,7 @@ public class UserController {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int delNums = 0;
-            delNums=userService.delete(delIds);
+            delNums=userRoleService.delete(delIds);
             if(delNums>0){
                 resMap.put("success", true);
                 resMap.put("delNums", delNums);

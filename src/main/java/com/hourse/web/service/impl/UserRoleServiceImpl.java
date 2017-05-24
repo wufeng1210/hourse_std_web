@@ -2,6 +2,7 @@ package com.hourse.web.service.impl;
 
 import com.hourse.web.mapper.UserAuthMapper;
 import com.hourse.web.mapper.UserRoleMapper;
+import com.hourse.web.model.User;
 import com.hourse.web.model.UserAuth;
 import com.hourse.web.model.UserRole;
 import com.hourse.web.service.IUserAuthService;
@@ -28,5 +29,23 @@ public class UserRoleServiceImpl implements IUserRoleService {
 
     public UserRole getUserRoleByRoleId(int roleId) {
         return  userRoleMapper.getUserRoleByRoleId(roleId);
+    }
+    public List<UserRole> queryList(UserRole userRole) {
+        return  userRoleMapper.queryList(userRole);
+    }
+    public int count(UserRole userRole) {
+        return  userRoleMapper.count(userRole);
+    }
+
+    public int save(UserRole userRole) {
+        return  userRoleMapper.save(userRole);
+    }
+
+    public int update(UserRole userRole) {
+        return  userRoleMapper.update(userRole);
+    }
+
+    public int delete(String roleIds) {
+        return  userRoleMapper.delete(roleIds);
     }
 }

@@ -14,13 +14,13 @@
 <script type="text/javascript">
     function doSearch(){
         $("#dia").datagrid('load',{
-            userId:-1,
-            userName:$("#userName").val()
+            roleId:-1,
+            roleName:$("#roleName").val()
         });
     }
     function openAddDialog(){
-        $("#dlg").dialog("open").dialog("setTitle","添加用户");
-        url="/user/saveOrUpdate.do?userId=-1";
+        $("#dlg").dialog("open").dialog("setTitle","添加角色");
+        url="/role/saveOrUpdate.do?roleId=-1";
     }
     function openModifyDialog(){
         var selectedRows=$("#dia").datagrid('getSelections');
@@ -29,13 +29,13 @@
             return;
         }
         var row=selectedRows[0];
-        $("#dlg").dialog("open").dialog("setTitle","修改用户信息");
+        $("#dlg").dialog("open").dialog("setTitle","修改角色信息");
         $("#fm").form("load",row);
         $("#User").attr("readonly","readonly");
-        //alert(row.Userid);
-        url="/user/saveOrUpdate.do?userId="+row.userId;
+        //alert(row.roleId);
+        url="/role/saveOrUpdate.do?roleId="+row.roleId;
     }
-    //保存用户
+    //保存
     function doSave(){
 
         $("#fm").form("submit",{
@@ -69,12 +69,12 @@
                 }
                 var strIds=[];
                 for(var i=0;i<selectedRows.length;i++){
-                    strIds.push(selectedRows[i].userId);
+                    strIds.push(selectedRows[i].roleId);
                 }
                 var ids=strIds.join(",");
                 $.messager.confirm("系统提示","你确定要删除这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
                     if(r){
-                        $.post("/user/delete.do",{delIds:ids},function(result){
+                        $.post("/role/delete.do",{delIds:ids},function(result){
                             if(result.success){
 
                                 $.messager.alert('系统提示',"您已成功删除<font color=red>"+result.delNums+"</font>条数据！");
@@ -98,14 +98,14 @@
 </script>
 </head>
 <body style="margin:1px;">
-<table id="dia" class="easyui-datagrid" title="用户表" style="width:1150px;height:470px" toolbar="#tb"
-       url="/user/list.do?userId=-1" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
+<table id="dia" class="easyui-datagrid" title="角色表" style="width:1150px;height:470px" toolbar="#tb"
+       url="/role/list.do?roleId=-1" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
        fit="true" idField="id">
     <thead data-options="frozen:true">
     <tr>
-        <th   data-options="field:'userId',width:150" >用户编号</th>
-        <th   data-options="field:'userName',width:150" >用户姓名</th>
-        <th   data-options="field:'userPassWord',width:150" >密码</th>
+        <th   data-options="field:'roleId',width:150" >角色编号</th>
+        <th   data-options="field:'roleName',width:150" >角色名称</th>
+        <#--<th   data-options="field:'userPassWord',width:150" >密码</th>-->
     </tr>
     </thead>
 </table>
@@ -115,7 +115,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>
 <div>
-    &nbsp;用户名：<input type="text" name="userName" id="userName" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
+    &nbsp;角色名：<input type="text" name="roleName" id="roleName" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
 
     <a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 </div>
@@ -125,13 +125,13 @@
     <form id="fm" method="post">
         <table>
             <tr>
-                <td>用户名:</td>
-                <td><input type="text" id="userName" name="userName" class="easyui-validatebox" required="true"/></td>
+                <td>角色名:</td>
+                <td><input type="text" id="roleName" name="roleName" class="easyui-validatebox" required="true"/></td>
             <tr>
-            </tr>
-                <td>密码:</td>
-                <td><input type="text" id="userPassWord" name="userPassWord" class="easyui-validatebox" required="true"/></td>
-            </tr>
+            <#--</tr>-->
+                <#--<td>描述:</td>-->
+                <#--<td><input type="text" id="userPassWord" name="userPassWord" class="easyui-validatebox" required="true"/></td>-->
+            <#--</tr>-->
 
         </table>
     </form>
