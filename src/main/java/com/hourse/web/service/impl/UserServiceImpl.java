@@ -27,7 +27,9 @@ public class UserServiceImpl implements IUserService {
     public List<User> getUserById(User user) {
         return  userMapper.getUserInfo(user);
     }
-
+    public User query(String userId) {
+        return  userMapper.query(userId);
+    }
     public List<User> queryList(User user) {
         return  userMapper.queryList(user);
     }

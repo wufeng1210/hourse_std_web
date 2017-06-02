@@ -27,6 +27,7 @@ import java.util.Map;
  * Created by wufeng on 2017/4/10.
  */
 @Controller
+@RequestMapping("auth")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
@@ -39,7 +40,7 @@ public class AuthController {
 
 
     @ResponseBody
-    @RequestMapping()
+    @RequestMapping("getAuth")
     public List<Map<String,Object>> getAuth(User user) {
         List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
         try{

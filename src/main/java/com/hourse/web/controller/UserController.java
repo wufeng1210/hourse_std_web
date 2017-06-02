@@ -104,4 +104,29 @@ public class UserController {
         }
         return resMap;
     }
+
+    @ResponseBody
+    @RequestMapping("modifyPassword")
+    public Map<String,Object> modifyPassword(String userId,String oldPassword,String newPassword) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            User user=userService.query(userId);
+            if(user == null || !user.getUserPassWord().equals(oldPassword)){
+                resMap.put("success", "true");
+                resMap.put("errorMsg", "账号不存在或原密码错误");
+            }else {
+                user.setUserPassWord(newPassword);
+                int updateNum = userService.update(user);
+                if (updateNum > 0) {
+                    resMap.put("success", "true");
+                } else {
+                    resMap.put("success", "true");
+                    resMap.put("errorMsg", "修改失败");
+                }
+            }
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
 }

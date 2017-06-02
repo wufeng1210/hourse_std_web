@@ -18,6 +18,9 @@ public interface UserMapper {
     @Select("select * from user_info where userName = #{userName} and userPassWord = #{userPassWord}")
     List<User> getUserInfo(User user);
 
+    @Select("select * from user_info where userId = #{userId}")
+    User query(String userId);
+
     @SelectProvider(method = "queryList", type = UserProvider.class)
     List<User> queryList(User user);
     @SelectProvider(method = "count", type = UserProvider.class)

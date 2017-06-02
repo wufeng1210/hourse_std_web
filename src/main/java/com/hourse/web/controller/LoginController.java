@@ -59,4 +59,19 @@ public class LoginController {
 
         return modelAndView;
     }
+
+    /**
+     * 登录并跳转到主页
+     * @param user
+     * @param response
+     * @return
+     */
+    @RequestMapping("logout")
+    public ModelAndView logout(User user, HttpServletResponse response){
+        ModelAndView modelAndView = new ModelAndView();
+        CookieUtil.clearCookie(response,"hoursestd", PropertiesUtils.get("domain"));
+        modelAndView.addObject("securityName","12212");
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
 }

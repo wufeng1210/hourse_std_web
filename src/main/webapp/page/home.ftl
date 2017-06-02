@@ -16,15 +16,15 @@
             $("#tree").tree({
 
                 line : tree,
-                url : 'getAuth.do?roleId=${userInfo.roleId}',
+                url : '/auth/getAuth.do?roleId=${userInfo.roleId}',
                 //state:"closed",
                 onLoadSuccess : function() {
                     $("#tree").tree('collapseAll');
                 },
                 onClick : function(node) {
-                    if (node.iconCls == "icon-exit") {
+                    if (node.id == 99) {
                         logout();
-                    } else if (node.iconCls == "icon-modifyPassword") {
+                    } else if (node.id == 88) {
                         openPasswordModifyDialog();
                     }
                     else if (node.attributes.authPath) {
@@ -65,12 +65,12 @@
             function logout() {
                 $.messager.confirm('系统提示', '您确定要退出系统吗？', function(r) {
                     if (r) {
-                        window.location.href = 'user?action=logout';
+                        window.location.href = 'logout.do';
                     }
                 });
             }
             function openPasswordModifyDialog() {
-                url = "user?action=modifyPassword";
+                url = "/user/modifyPassword.do";
                 $("#dlg").dialog("open").dialog("setTitle", "修改密码");
             }
 
@@ -127,7 +127,6 @@
                     var result = eval('(' + result + ')');
 
                     if (result.errorMsg) {
-                        alert("yes");
                         $.messager.alert('系统提示', result.errorMsg);
                         return;
                     } else {
@@ -212,10 +211,9 @@
         <table cellspacing="4px;">
             <tr>
                 <td>用户名：</td>
-                <td><input type="hidden" name="userId" id="userId"
-                           /><input type="text" name="useName"
-                                                                   readonly="readonly"
-                                                                   style="width: 200px; background-color: #dddbdb;" /></td>
+                <td><input type="hidden" name="userId" id="userId" value="${userInfo.userId!''}"/>
+                    <input type="text" name="userName" readonly="readonly" style="width: 200px; background-color: #dddbdb;" value="${userInfo.userName!''}"/>
+                </td>
             </tr>
             <tr>
                 <td>原密码：</td>
