@@ -2,8 +2,10 @@ package com.hourse.web.service.impl;
 
 import com.hourse.web.mapper.UserAuthMapper;
 import com.hourse.web.mapper.UserMapper;
+import com.hourse.web.model.Hourse;
 import com.hourse.web.model.User;
 import com.hourse.web.model.UserAuth;
+import com.hourse.web.model.UserRole;
 import com.hourse.web.service.IUserAuthService;
 import com.hourse.web.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -59,5 +61,27 @@ public class UserAuthServiceImpl implements IUserAuthService {
             resList.add(temp);
         }
         return resList;
+    }
+
+    public UserAuth query(int authId) {
+        return  userAuthMapper.query(authId);
+    }
+    public List<UserAuth> queryList(UserAuth userAuth) {
+        return  userAuthMapper.queryList(userAuth);
+    }
+    public int count(UserAuth userAuth) {
+        return  userAuthMapper.count(userAuth);
+    }
+
+    public int save(UserAuth userAuth) {
+        return  userAuthMapper.save(userAuth);
+    }
+
+    public int update(UserAuth userAuth) {
+        return  userAuthMapper.update(userAuth);
+    }
+
+    public int delete(String authIds) {
+        return  userAuthMapper.delete(authIds);
     }
 }

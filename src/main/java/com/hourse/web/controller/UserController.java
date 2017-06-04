@@ -5,6 +5,7 @@ import com.hourse.web.model.UserRole;
 import com.hourse.web.service.IUserAuthService;
 import com.hourse.web.service.IUserRoleService;
 import com.hourse.web.service.IUserService;
+import com.hourse.web.util.MapUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,8 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IUserRoleService userRoleService;
 
 
 
@@ -46,9 +49,15 @@ public class UserController {
             qryUser.setUserId(userId);
             qryUser.setUserName(userName);
             List<User> userList = userService.queryList(qryUser);
+            List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
+            for(User u : userList){
+                Map<String,Object> m = MapUtil.toMap(u);
+                m.put("roleName",userRoleService.query(u.getRoleId()).getRoleName());
+                resList.add(m);
+            }
             int total = userService.count(qryUser);
             resMap.put("total", total);
-            resMap.put("rows",userList);
+            resMap.put("rows",resList);
         }catch (Exception e){
 
         }
@@ -57,7 +66,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(int userId, String userName,String userPassWord) {
+    public Map<String,Object> saveOrUpdate(int userId, String userName,String userPassWord,int roleId) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
@@ -67,6 +76,7 @@ public class UserController {
             opUser.setUserPassWord(userPassWord);
             opUser.setUserType("0");
             opUser.setSecretKey(userPassWord);
+            opUser.setRoleId(roleId);
             if( -1 != userId){
                 saveNums=userService.update(opUser);
             }else{
@@ -107,7 +117,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("modifyPassword")
-    public Map<String,Object> modifyPassword(String userId,String oldPassword,String newPassword) {
+    public Map<String,Object> modifyPassword(int userId,String oldPassword,String newPassword) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             User user=userService.query(userId);

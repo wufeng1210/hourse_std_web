@@ -1,6 +1,7 @@
 package com.hourse.web.mapper;
 
 import com.hourse.web.model.Hourse;
+import com.hourse.web.model.UserAuth;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +17,8 @@ import java.util.List;
  */
 @Repository
 public interface HourseMapper {
-
+    @Select("select * from hourse_info where hourseId = #{hourseId}")
+    Hourse query(int hourseId);
     @SelectProvider(method = "queryList", type = HourseProvider.class)
     List<Hourse> queryList(Hourse Hourse);
     @SelectProvider(method = "count", type = HourseProvider.class)

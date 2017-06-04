@@ -59,6 +59,37 @@
         $("#dlg").dialog("close");
         $("#fm").form('clear');
     }
+    //打开role选择角色
+    function openRoleChooseDialog(){
+        $("#dlg2").dialog("open").dialog("setTitle","选择角色");
+    }
+    //查找
+    function searchRole(){
+        $('#dg2').datagrid('load',{
+            s_roleName:$("#s_roleName").val(),
+
+        });
+    }
+    //关闭图框
+    function closeRoleDialog(){
+        $("#s_roleName").val("");
+        $('#dg2').datagrid('load',{
+            s_roleName:""
+        });
+        $("#dlg2").dialog("close");
+    }
+    //选择数据
+    function chooseRole(){
+        var selectedRows=$("#dg2").datagrid('getSelections');
+        if(selectedRows.length!=1){
+            $.messager.alert('系统提示','请选择一个角色！');
+            return;
+        }
+        var row=selectedRows[0];
+        $("#roleId").val(row.roleId);
+        $("#roleName").val(row.roleName);
+        closeRoleDialog();
+    }
     function doDelete(){
 //        $.post("/deleteUser.do?user_id=testid",{},function(result){
 //            if(result.role=="超级管理员"||result.role=="管理员"||result.role=="操作员"){
@@ -103,9 +134,11 @@
        fit="true" idField="id">
     <thead data-options="frozen:true">
     <tr>
+        <th field="cb" checkbox="true" align="center"></th>
         <th   data-options="field:'userId',width:150" >用户编号</th>
         <th   data-options="field:'userName',width:150" >用户姓名</th>
         <th   data-options="field:'userPassWord',width:150" >密码</th>
+        <th   data-options="field:'roleName',width:150" >用户角色</th>
     </tr>
     </thead>
 </table>
@@ -127,12 +160,17 @@
             <tr>
                 <td>用户名:</td>
                 <td><input type="text" id="userName" name="userName" class="easyui-validatebox" required="true"/></td>
-            <tr>
             </tr>
+            <tr>
                 <td>密码:</td>
                 <td><input type="text" id="userPassWord" name="userPassWord" class="easyui-validatebox" required="true"/></td>
             </tr>
-
+            <tr>
+                <td>角色名称：</td>
+                <td><input type="hidden" id="roleId" name="roleId" /><input type="text"  id="roleName" name="roleName"  readonly="readonly" class="easyui-validatebox" required="true"/></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td colspan="2"><a href="javascript:openRoleChooseDialog()"  class="easyui-linkbutton" >选择角色</a></td>
+            </tr>
         </table>
     </form>
 
@@ -141,20 +179,28 @@
     <a href="javascript:doSave()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
     <a href="javascript:closeAddDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
-<#--<div id="dlg2" class="easyui-dialog" style="width:500px;height:150px;padding:10px 20px"-->
-     <#--closed="true" buttons="#dlg2-buttons">-->
-    <#--<form id="uploadForm" method="post" enctype="multipart/form-data">-->
-        <#--<table>-->
-            <#--<tr>-->
-                <#--<td>上传文件</td>-->
-                <#--<td><input type="file" name="storeUploadFile"/>上传文件</td>-->
-            <#--</tr>-->
-        <#--</table>-->
-    <#--</form>-->
-<#--</div>-->
-<#--<div id="dlg2-buttons">-->
-    <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="uploadFile()">上传文件</a>-->
-    <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg2').dialog('close')">关闭</a>-->
-<#--</div>-->
+<div id="dlg2" class="easyui-dialog"  iconCls="icon-search" style="width:500px;height:480px;padding:10px 20px"
+     closed="true" buttons="#dlg2-buttons">
+    <div style="height:40px;" align="center">
+        角色名称：<input type="text" id="s_roleName" name="s_roleName"  onkeydown="if(event.keyCode==13) searchRole()" />
+        <a href="javascript:searchRole()"  class="easyui-linkbutton"  iconCls="icon-search"  plain="true">搜索</a>
+    </div>
+    <div style="height:350px;">
+        <table id="dg2" title="查询结果" class="easyui-datagrid"  fitColumn="true"
+               pagination="true" rownumbers="true" url="/role/list.do?roleId=-1"  singleSelect="true" fit="true" >
+            <thead>
+            <tr>
+                <th field="roleId"  width="50"  align="center">编号</th>
+                <th field="roleName"  width="150"  align="center">角色名称</th>
+                <th field="roleDescription"  width="210"  align="center">备注</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div id="dlg2-buttons">
+    <a href="javascript:chooseRole()"  class="easyui-linkbutton"  iconCls="icon-ok"  >确定</a>
+    <a href="javascript:closeRoleDialog()"  class="easyui-linkbutton"  iconCls="icon-cancel"  >关闭</a>
+</div>
 </body>
 </html>

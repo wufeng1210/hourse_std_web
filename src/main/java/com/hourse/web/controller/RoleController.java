@@ -99,4 +99,16 @@ public class RoleController {
         }
         return resMap;
     }
+
+    @ResponseBody
+    @RequestMapping("authMenu")
+    public Map<String,Object> authMenu(String roleId) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+//
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
 }

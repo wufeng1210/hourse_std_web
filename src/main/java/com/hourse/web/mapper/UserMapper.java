@@ -19,7 +19,7 @@ public interface UserMapper {
     List<User> getUserInfo(User user);
 
     @Select("select * from user_info where userId = #{userId}")
-    User query(String userId);
+    User query(int userId);
 
     @SelectProvider(method = "queryList", type = UserProvider.class)
     List<User> queryList(User user);

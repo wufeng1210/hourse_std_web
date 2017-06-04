@@ -52,4 +52,73 @@ public class AuthController {
         }
         return resList;
     }
+
+    @RequestMapping("manager")
+    public String manager() {
+        return "authManager";
+    }
+    @ResponseBody
+    @RequestMapping("list")
+    public Map<String,Object> list(int authId,String authName) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            UserAuth qryUserAuth = new UserAuth();
+            qryUserAuth.setAuthId(authId);
+            qryUserAuth.setAuthName(authName);
+            List<UserAuth> roleList = userAuthService.queryList(qryUserAuth);
+            int total = userAuthService.count(qryUserAuth);
+            resMap.put("total", total);
+            resMap.put("rows",roleList);
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("saveOrUpdate")
+    public Map<String,Object> saveOrUpdate(int authId,String authName) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            int saveNums = 0;
+            UserAuth opUserAuth = new UserAuth();
+            opUserAuth.setAuthId(authId);
+            opUserAuth.setAuthName(authName);
+            if( -1 != authId){
+                saveNums=userAuthService.update(opUserAuth);
+            }else{
+                saveNums=userAuthService.save(opUserAuth);
+            }
+            if(saveNums>0){
+                resMap.put("success", true);
+
+            }else{
+                resMap.put("success", false);
+                resMap.put("errorMsg", "保存失败");
+            }
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("delete")
+    public Map<String,Object> delete(String delIds) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            int delNums = 0;
+            delNums=userAuthService.delete(delIds);
+            if(delNums>0){
+                resMap.put("success", true);
+                resMap.put("delNums", delNums);
+            }else{
+                resMap.put("success", false);
+                resMap.put("errorMsg", "删除失败");
+            }
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
 }

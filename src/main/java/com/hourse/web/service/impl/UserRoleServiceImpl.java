@@ -30,6 +30,10 @@ public class UserRoleServiceImpl implements IUserRoleService {
     public UserRole getUserRoleByRoleId(int roleId) {
         return  userRoleMapper.getUserRoleByRoleId(roleId);
     }
+
+    public UserRole query(int roleId) {
+        return  userRoleMapper.query(roleId);
+    }
     public List<UserRole> queryList(UserRole userRole) {
         return  userRoleMapper.queryList(userRole);
     }

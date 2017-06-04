@@ -12,6 +12,7 @@ public interface IUserRoleService {
     public List<UserRole> getUserRoleById(UserRole userRole);
     public UserRole getUserRoleByRoleId(int roleId);
 
+    UserRole query(int roleId);
     List<UserRole> queryList(UserRole userRole);
     int count(UserRole userRole);
     int save(UserRole userRole);

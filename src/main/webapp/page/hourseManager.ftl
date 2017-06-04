@@ -103,6 +103,7 @@
        fit="true" idField="id">
     <thead data-options="frozen:true">
     <tr>
+        <th field="cb" checkbox="true" align="center"></th>
         <th   data-options="field:'hourseId',width:150" >房屋编号</th>
         <th   data-options="field:'userId',width:150" >用户编号</th>
         <#--<th   data-options="field:'userPassWord',width:150" >密码</th>-->
@@ -127,7 +128,7 @@
             <tr>
                 <td>房屋名:</td>
                 <td><input type="text" id="hourseName" name="hourseName" class="easyui-validatebox" required="true"/></td>
-            <tr>
+            </tr>
             <#--</tr>-->
                 <#--<td>描述:</td>-->
                 <#--<td><input type="text" id="userPassWord" name="userPassWord" class="easyui-validatebox" required="true"/></td>-->

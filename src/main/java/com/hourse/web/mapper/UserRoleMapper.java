@@ -24,6 +24,9 @@ public interface UserRoleMapper {
     @Select("select * from user_role where roleId = #{roleId}")
     UserRole getUserRoleByRoleId(@Param("roleId")int  roleId);
 
+    @Select("select * from user_role where roleId = #{roleId}")
+    UserRole query(int roleId);
+
     @SelectProvider(method = "queryList", type = UserRoleProvider.class)
     List<UserRole> queryList(UserRole userRole);
     @SelectProvider(method = "count", type = UserRoleProvider.class)

@@ -13,9 +13,9 @@ public class UserRoleProvider {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT * ");
 		sql.append(" FROM user_role WHERE ");
-		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(userRole,"userId","roleId"));
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(userRole,"roleId"));
 		if(-1 != userRole.getRoleId()){
-			sql.append(" and userId = " + userRole.getRoleId());
+			sql.append(" and roleId = " + userRole.getRoleId());
 		}
 		return sql.toString();
 	}
