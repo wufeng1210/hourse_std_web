@@ -12,11 +12,7 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 
- * @author Zhangjun
- *
- */
+
 public class CookieUtil {
 	protected static Logger logger = Logger
 			.getLogger(CookieUtil.class);

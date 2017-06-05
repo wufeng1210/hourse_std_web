@@ -5,12 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * 功能说明: 用于过滤敏感信息<p>使用该注解的字段的值的[start,end]部分将在MapUtils.toMap(object)中被替换成*</p>
- * 系统版本: v1.0<br>
- * 开发人员: @author yejg<br>
- * 开发时间: 2016年9月2日<br>
- */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SensitiveInfo {

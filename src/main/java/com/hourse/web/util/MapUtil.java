@@ -33,12 +33,6 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-/**
- * 功能说明: Map工具类<br>
- * 系统版本: v1.0<br>
- * 开发人员: @author tanjk@hundsun.com<br>
- * 开发时间: 2012-5-22<br>
- */
 public class MapUtil extends MapUtils {
 
 	private final static Logger logger = LoggerFactory.getLogger(MapUtil.class);

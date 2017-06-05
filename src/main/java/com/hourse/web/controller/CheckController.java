@@ -2,6 +2,9 @@ package com.hourse.web.controller;
 
 import com.hourse.web.model.Hourse;
 import com.hourse.web.service.IHourseService;
+import com.hourse.web.service.IUserService;
+import com.hourse.web.util.MapUtil;
+import com.hourse.web.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +28,8 @@ public class CheckController {
 
     @Autowired
     private IHourseService hourseService;
+    @Autowired
+    private IUserService userService;
 
 
 
@@ -39,10 +45,17 @@ public class CheckController {
             Hourse qryHourse = new Hourse();
             qryHourse.setHourseId(hourseId);
             qryHourse.setState("0");
-            List<Hourse> roleList = hourseService.queryList(qryHourse);
+            List<Hourse> hourseList = hourseService.queryList(qryHourse);
+            List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
+            for(Hourse h:hourseList){
+                Map<String,Object> m = MapUtil.toMap(h);
+                m.put("userName",userService.query(h.getUserId()).getUserName());
+                m.put("statusStr", StringUtil.translateStatus(h.getState()));
+                resList.add(m);
+            }
             int total = hourseService.count(qryHourse);
             resMap.put("total", total);
-            resMap.put("rows",roleList);
+            resMap.put("rows",resList);
         }catch (Exception e){
 
         }

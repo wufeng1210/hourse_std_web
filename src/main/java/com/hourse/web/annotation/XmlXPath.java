@@ -5,12 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * 功能说明: xml到Bean映射，XPath路径注解<br>
- * 系统版本: v1.0<br>
- * 开发人员: @author guanhui<br>
- * 开发时间: 2016年09月08日<br>
- */
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface XmlXPath{

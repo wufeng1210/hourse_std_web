@@ -11,12 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * 功能说明: Date工具类<br>
- * 系统版本: v1.0<br>
- * 开发人员: @author yejg<br>
- * 开发时间: 2015年8月3日<br>
- */
 public class DateUtil extends DateUtils {
 
 	private final static Logger logger = LoggerFactory.getLogger(DateUtil.class);

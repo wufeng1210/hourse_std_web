@@ -65,10 +65,10 @@ public class AuthController {
             UserAuth qryUserAuth = new UserAuth();
             qryUserAuth.setAuthId(authId);
             qryUserAuth.setAuthName(authName);
-            List<UserAuth> roleList = userAuthService.queryList(qryUserAuth);
+            List<UserAuth> userAuthList = userAuthService.queryList(qryUserAuth);
             int total = userAuthService.count(qryUserAuth);
             resMap.put("total", total);
-            resMap.put("rows",roleList);
+            resMap.put("rows",userAuthList);
         }catch (Exception e){
 
         }

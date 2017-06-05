@@ -6,12 +6,6 @@ import javax.annotation.PostConstruct;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * 功能说明: 数据脱敏管理器<br>
- * 系统版本: v1.0<br>
- * 开发人员: @author guanhui<br>
- * 开发时间: 2016年11月03日<br>
- */
 @Component
 public class SensitiveManager {
 

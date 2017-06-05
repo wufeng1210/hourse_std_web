@@ -2,12 +2,6 @@ package com.hourse.web.datatype;
 
 import java.util.Date;
 
-/**
- * 功能说明: 当前日期，数据库保留类型<br>
- * 系统版本: v1.0<br>
- * 开发人员: @author kongdy<br>
- * 开发时间: 2015年8月12日<br>
- */
 public final class SysDate extends Date {
 
 	/**

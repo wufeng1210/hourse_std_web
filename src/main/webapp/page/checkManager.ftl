@@ -101,13 +101,36 @@
 <table id="dia" class="easyui-datagrid" title="审核表" style="width:1150px;height:470px" toolbar="#tb"
        url="/check/list.do?hourseId=-1" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
        fit="true" idField="id">
-    <thead data-options="frozen:true">
+    <thead data-options="frozen:false">
     <tr>
         <th field="cb" checkbox="true" align="center"></th>
         <th   data-options="field:'hourseId',width:150" >房屋编号</th>
         <th   data-options="field:'userId',width:150" >用户编号</th>
-        <th   data-options="field:'state',width:150" >状态</th>
-        <#--<th   data-options="field:'userPassWord',width:150" >密码</th>-->
+        <th   data-options="field:'userName',width:150" >用户名称</th>
+        <th   data-options="field:'province',width:150" >省份</th>
+        <th   data-options="field:'city',width:150" >城市</th>
+        <th   data-options="field:'area',width:150" >区域</th>
+        <th   data-options="field:'residentialQuarters',width:150" >房屋所在小区</th>
+        <th   data-options="field:'roomNum',width:150" >房间数量</th>
+        <th   data-options="field:'toiletNum',width:150" >卫生间数量</th>
+        <th   data-options="field:'hallNum',width:150" >大厅数量</th>
+
+        <th   data-options="field:'kitchenNum',width:150" >厨房数量</th>
+        <th   data-options="field:'monthly',width:150" >月租（元）</th>
+        <th   data-options="field:'packingingLot',width:150" >是否有车位</th>
+        <th   data-options="field:'rentingWay',width:150" >租房方式</th>
+        <th   data-options="field:'brokerMobile',width:150" >经纪人手机号</th>
+        <th   data-options="field:'brokerCode',width:150" >经纪人编号</th>
+        <th   data-options="field:'brokerName',width:150" >经纪人姓名</th>
+        <th   data-options="field:'areaCovered',width:150" >占比面积（平方）</th>
+        <th   data-options="field:'refrigerator',width:150" >是否有冰箱</th>
+        <th   data-options="field:'heater',width:150" >是否有热水器</th>
+        <th   data-options="field:'bed',width:150" >是否有床</th>
+        <th   data-options="field:'desk',width:150" >是否有桌子</th>
+        <th   data-options="field:'airConditioner',width:150" >是否有空调</th>
+        <th   data-options="field:'cabinet',width:150" >是否有柜子</th>
+
+        <th   data-options="field:'statusStr',width:150" >状态</th>
     </tr>
     </thead>
 </table>

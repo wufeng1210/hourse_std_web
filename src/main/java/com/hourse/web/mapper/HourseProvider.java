@@ -12,9 +12,12 @@ public class HourseProvider {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT * ");
 		sql.append(" FROM hourse_info WHERE ");
-		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(Hourse,"hourseId"));
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(Hourse,"hourseId","userId"));
 		if(-1 != Hourse.getHourseId()){
 			sql.append(" and hourseId = " + Hourse.getHourseId());
+		}
+		if(0 != Hourse.getUserId()){
+			sql.append(" and userId = " + Hourse.getUserId());
 		}
 		return sql.toString();
 	}
