@@ -7,7 +7,8 @@ public class Hourse {
     private int hourseId;
     private int userId;
     private String hourseAddr;
-    private String hourseImageUrl;
+    private String longitude;
+    private String latitude;
     private String province;
     private String city;
     private String area;
@@ -17,21 +18,22 @@ public class Hourse {
     private int hallNum;
     private int kitchenNum;
     private int monthly;
-    private String parkingLot;
+    private int packingingLot;
     private String rentingWay;
+    private String limitType;
+    private String fixtureType;
     private String brokerMobile;
     private String brokerCode;
     private String brokerName;
-    private int areaCovered;
-    private boolean refrigerator;
-    private boolean heater;
-    private boolean bed;
-    private boolean desk;
-    private boolean airConditioner;
-    private String cabinet;
+    private String areaCovered;
+    private String squarePrice;
+    private String furniture;
+    private String near;
+    private String traffic;
     private String state;
-    private String descripbe;
-
+    private String description;
+    private String recommend;
+    private String isLend;
 
     public int getHourseId() {
         return hourseId;
@@ -57,12 +59,20 @@ public class Hourse {
         this.hourseAddr = hourseAddr;
     }
 
-    public String getHourseImageUrl() {
-        return hourseImageUrl;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setHourseImageUrl(String hourseImageUrl) {
-        this.hourseImageUrl = hourseImageUrl;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
     public String getProvince() {
@@ -137,12 +147,12 @@ public class Hourse {
         this.monthly = monthly;
     }
 
-    public String getParkingLot() {
-        return parkingLot;
+    public int getPackingingLot() {
+        return packingingLot;
     }
 
-    public void setParkingLot(String parkingLot) {
-        this.parkingLot = parkingLot;
+    public void setPackingingLot(int packingingLot) {
+        this.packingingLot = packingingLot;
     }
 
     public String getRentingWay() {
@@ -151,6 +161,22 @@ public class Hourse {
 
     public void setRentingWay(String rentingWay) {
         this.rentingWay = rentingWay;
+    }
+
+    public String getLimitType() {
+        return limitType;
+    }
+
+    public void setLimitType(String limitType) {
+        this.limitType = limitType;
+    }
+
+    public String getFixtureType() {
+        return fixtureType;
+    }
+
+    public void setFixtureType(String fixtureType) {
+        this.fixtureType = fixtureType;
     }
 
     public String getBrokerMobile() {
@@ -177,60 +203,44 @@ public class Hourse {
         this.brokerName = brokerName;
     }
 
-    public int getAreaCovered() {
+    public String getAreaCovered() {
         return areaCovered;
     }
 
-    public void setAreaCovered(int areaCovered) {
+    public void setAreaCovered(String areaCovered) {
         this.areaCovered = areaCovered;
     }
 
-    public boolean isRefrigerator() {
-        return refrigerator;
+    public String getSquarePrice() {
+        return squarePrice;
     }
 
-    public void setRefrigerator(boolean refrigerator) {
-        this.refrigerator = refrigerator;
+    public void setSquarePrice(String squarePrice) {
+        this.squarePrice = squarePrice;
     }
 
-    public boolean isHeater() {
-        return heater;
+    public String getFurniture() {
+        return furniture;
     }
 
-    public void setHeater(boolean heater) {
-        this.heater = heater;
+    public void setFurniture(String furniture) {
+        this.furniture = furniture;
     }
 
-    public boolean isBed() {
-        return bed;
+    public String getNear() {
+        return near;
     }
 
-    public void setBed(boolean bed) {
-        this.bed = bed;
+    public void setNear(String near) {
+        this.near = near;
     }
 
-    public boolean isDesk() {
-        return desk;
+    public String getTraffic() {
+        return traffic;
     }
 
-    public void setDesk(boolean desk) {
-        this.desk = desk;
-    }
-
-    public boolean isAirConditioner() {
-        return airConditioner;
-    }
-
-    public void setAirConditioner(boolean airConditioner) {
-        this.airConditioner = airConditioner;
-    }
-
-    public String getCabinet() {
-        return cabinet;
-    }
-
-    public void setCabinet(String cabinet) {
-        this.cabinet = cabinet;
+    public void setTraffic(String traffic) {
+        this.traffic = traffic;
     }
 
     public String getState() {
@@ -241,11 +251,27 @@ public class Hourse {
         this.state = state;
     }
 
-    public String getDescripbe() {
-        return descripbe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripbe(String descripbe) {
-        this.descripbe = descripbe;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
+    }
+
+    public String getIsLend() {
+        return isLend;
+    }
+
+    public void setIsLend(String isLend) {
+        this.isLend = isLend;
     }
 }

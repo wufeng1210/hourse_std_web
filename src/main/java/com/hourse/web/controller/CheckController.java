@@ -64,12 +64,13 @@ public class CheckController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(int hourseId) {
+    public Map<String,Object> saveOrUpdate(int hourseId,String state) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
             Hourse qryHourse = new Hourse();
             qryHourse.setHourseId(hourseId);
+            qryHourse.setState(state);
             if( -1 != hourseId){
                 saveNums=hourseService.update(qryHourse);
             }else{

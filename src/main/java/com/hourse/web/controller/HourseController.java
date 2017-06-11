@@ -51,12 +51,15 @@ public class HourseController {
             for(Hourse h:hourseList){
                 Map<String,Object> m = MapUtil.toMap(h);
                 m.put("userName",userService.query(h.getUserId()).getUserName());
-                m.put("statusStr", StringUtil.translateStatus(h.getState()));
+                m.put("statusStr", StringUtil.translateStatus(h.getState()));//状态
+                m.put("packingingLotStr", StringUtil.yes_no_map.get(""+h.getPackingingLot()));//是否有车位
+                m.put("recommendStr", StringUtil.yes_no_map.get(h.getRecommend()));//是否推荐
+                m.put("isLendStr", StringUtil.yes_no_map.get(h.getIsLend()));//是否已出租
                 resList.add(m);
             }
             int total = hourseService.count(qryHourse);
             resMap.put("total", total);
-            resMap.put("rows",hourseList);
+            resMap.put("rows",resList);
         }catch (Exception e){
 
         }

@@ -31,7 +31,8 @@
         var row=selectedRows[0];
         $("#dlg").dialog("open").dialog("setTitle","修改房屋信息");
         $("#fm").form("load",row);
-        $("#User").attr("readonly","readonly");
+        $("#hourseId").attr("readonly","readonly");
+        $("#userId").attr("readonly","readonly");
         //alert(row.hourseId);
         url="/hourse/saveOrUpdate.do?hourseId="+row.hourseId;
     }
@@ -117,18 +118,19 @@
 
         <th   data-options="field:'kitchenNum',width:150" >厨房数量</th>
         <th   data-options="field:'monthly',width:150" >月租（元）</th>
-        <th   data-options="field:'packingingLot',width:150" >是否有车位</th>
+        <th   data-options="field:'packingingLotStr',width:150" >是否有车位</th>
         <th   data-options="field:'rentingWay',width:150" >租房方式</th>
         <th   data-options="field:'brokerMobile',width:150" >经纪人手机号</th>
         <th   data-options="field:'brokerCode',width:150" >经纪人编号</th>
         <th   data-options="field:'brokerName',width:150" >经纪人姓名</th>
         <th   data-options="field:'areaCovered',width:150" >占比面积（平方）</th>
-        <th   data-options="field:'refrigerator',width:150" >是否有冰箱</th>
-        <th   data-options="field:'heater',width:150" >是否有热水器</th>
-        <th   data-options="field:'bed',width:150" >是否有床</th>
-        <th   data-options="field:'desk',width:150" >是否有桌子</th>
-        <th   data-options="field:'airConditioner',width:150" >是否有空调</th>
-        <th   data-options="field:'cabinet',width:150" >是否有柜子</th>
+        <th   data-options="field:'squarePrice',width:150" >价格（平方）</th>
+        <th   data-options="field:'furniture',width:150" >家具</th>
+        <th   data-options="field:'near',width:150" >周边</th>
+        <th   data-options="field:'traffic',width:150" >交通</th>
+        <th   data-options="field:'description',width:150" >描述</th>
+        <th   data-options="field:'recommendStr',width:150" >是否推荐</th>
+        <th   data-options="field:'isLendStr',width:150" >是否已出租</th>
 
         <th   data-options="field:'statusStr',width:150" >状态</th>
     </tr>
@@ -150,13 +152,107 @@
     <form id="fm" method="post">
         <table>
             <tr>
-                <td>房屋名:</td>
-                <td><input type="text" id="hourseName" name="hourseName" class="easyui-validatebox" required="true"/></td>
+                <td>房屋编号:</td>
+                <td><input type="text" id="hourseId" name="hourseId" class="easyui-validatebox" required="true"/></td>
             </tr>
-            <#--</tr>-->
-                <#--<td>描述:</td>-->
-                <#--<td><input type="text" id="userPassWord" name="userPassWord" class="easyui-validatebox" required="true"/></td>-->
-            <#--</tr>-->
+            <tr>
+                <td>用户编号:</td>
+                <td><input type="text" id="userId" name="userId" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>用户名称:</td>
+                <td><input type="text" id="userName" name="userName" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>省份:</td>
+                <td><input type="text" id="province" name="province" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>城市:</td>
+                <td><input type="text" id="city" name="city" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>区域:</td>
+                <td><input type="text" id="area" name="area" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>房屋所在小区:</td>
+                <td><input type="text" id="residentialQuarters" name="residentialQuarters" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>房间数量:</td>
+                <td><input type="text" id="roomNum" name="roomNum" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>卫生间数量:</td>
+                <td><input type="text" id="toiletNum" name="toiletNum" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>大厅数量:</td>
+                <td><input type="text" id="hallNum" name="hallNum" class="easyui-validatebox" required="true"/></td>
+            </tr>
+
+            <tr>
+                <td>厨房数量:</td>
+                <td><input type="text" id="kitchenNum" name="kitchenNum" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>月租（元）:</td>
+                <td><input type="text" id="monthly" name="monthly" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>是否有车位:</td>
+                <td><input type="text" id="packingingLotStr" name="packingingLotStr" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>租房方式:</td>
+                <td><input type="text" id="rentingWay" name="rentingWay" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>经纪人手机号:</td>
+                <td><input type="text" id="brokerMobile" name="brokerMobile" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>经纪人编号:</td>
+                <td><input type="text" id="brokerCode" name="brokerCode" class="easyui-validatebox" required="true"/></td>
+            </tr>
+
+            <tr>
+                <td>经纪人姓名:</td>
+                <td><input type="text" id="brokerName" name="brokerName" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>占比面积（平方）:</td>
+                <td><input type="text" id="areaCovered" name="areaCovered" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>价格（平方）:</td>
+                <td><input type="text" id="squarePrice" name="squarePrice" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>家具:</td>
+                <td><input type="text" id="furniture" name="furniture" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>周边:</td>
+                <td><input type="text" id="near" name="near" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>交通:</td>
+                <td><input type="text" id="traffic" name="traffic" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>描述:</td>
+                <td><input type="text" id="description" name="description" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>是否推荐:</td>
+                <td><input type="text" id="recommendStr" name="recommendStr" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>是否已出租:</td>
+                <td><input type="text" id="isLendStr" name="isLendStr" class="easyui-validatebox" required="true"/></td>
+            </tr>
 
         </table>
     </form>

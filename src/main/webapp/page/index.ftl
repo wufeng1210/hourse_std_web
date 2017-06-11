@@ -18,6 +18,11 @@
     <!--[if lt IE 9]>
     <script src="page/assets/js/html5.js"></script>
     <![endif]-->
+    <script>
+        function loadimage(){
+            document.getElementById("randImage").src="page/image.jsp?"+Math.random();
+        }
+    </script>
 
 </head>
 
@@ -29,7 +34,9 @@
         <input type="text" name="userName" class="username" placeholder="请输入您的用户名">
         <input type="password" name="userPassWord" class="password" placeholder="请输入您的用户密码">
         <input type="Captcha" class="Captcha" name="Captcha" placeholder="请输入验证码">
+        <img onclick="loadimage()" title="换一张试试" name="randImage" id="randImage" src="page/image.jsp" style="margin-top: 25px;" width="120"  height="40" border="1" align="absmiddle">
         <button type="submit" class="submit_button">登录</button>
+    <span>${loginError!""}</span>
         <div class="error"><span>+</span></div>
     </form>
     <input type="hidden" value="${securityName}">

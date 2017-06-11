@@ -5,6 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class StringUtil extends MapUtils {
 
@@ -21,4 +24,21 @@ public class StringUtil extends MapUtils {
 		}
 		return resStr;
 	}
+
+	public final static Map<String, String> status_map = new HashMap<String, String>() {
+		{
+			put("0", "未审核");
+			put("1", "审核通过");
+			put("3", "审核打回");
+		}
+	};
+
+
+	public final static Map<String, String> yes_no_map = new HashMap<String, String>() {
+		{
+			put("1", "是");
+			put("0", "不是");
+		}
+	};
+
 }

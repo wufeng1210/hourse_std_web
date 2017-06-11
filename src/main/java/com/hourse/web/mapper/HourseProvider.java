@@ -12,7 +12,7 @@ public class HourseProvider {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT * ");
 		sql.append(" FROM hourse_info WHERE ");
-		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(Hourse,"hourseId","userId"));
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(Hourse,"hourseId","userId","hallNum","toiletNum","roomNum","monthly","kitchenNum","packingingLot"));
 		if(-1 != Hourse.getHourseId()){
 			sql.append(" and hourseId = " + Hourse.getHourseId());
 		}
@@ -26,9 +26,12 @@ public class HourseProvider {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT count(*) ");
 		sql.append(" FROM hourse_info WHERE ");
-		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(Hourse,"hourseId"));
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(Hourse,"hourseId","userId","hallNum","toiletNum","roomNum","monthly","kitchenNum","packingingLot"));
 		if(-1 != Hourse.getHourseId()){
 			sql.append(" and hourseId = " + Hourse.getHourseId());
+		}
+		if(0 != Hourse.getUserId()){
+			sql.append(" and userId = " + Hourse.getUserId());
 		}
 		return sql.toString();
 	}
@@ -39,7 +42,7 @@ public class HourseProvider {
 
 	public String update(Hourse Hourse){
 		StringBuffer sql = new StringBuffer(" UPDATE hourse_info ");
-		sql.append(SqlProviderUtil.provideSetterNotBlank(Hourse));
+		sql.append(SqlProviderUtil.provideSetterNotBlankWithout(Hourse, "hourse_info","hourseId","userId"));
 		sql.append(" WHERE ");
 		sql.append("hourseId=#{hourseId}");
 		return sql.toString();

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +46,16 @@ public class LoginController {
      * @return
      */
     @RequestMapping("login")
-    public ModelAndView login(User user, HttpServletResponse response){
+    public ModelAndView login(User user,HttpServletRequest request, HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView();
+        HttpSession session=request.getSession();
+        String imageCode=request.getParameter("Captcha");
+        if(!imageCode.equals(session.getAttribute("sRand"))){
+            modelAndView.setViewName("index");
+            modelAndView.addObject("securityName","12212");
+            modelAndView.addObject("loginError","验证码错误");
+            return modelAndView;
+        }
         List<User> userList =iUserService.getUserById(user);
         if(!userList.isEmpty()){
             CookieUtil.setObjectCookie(response, userList.get(0), "hoursestd", -1, PropertiesUtils.get("domain"));
@@ -55,6 +64,7 @@ public class LoginController {
         }else{
             modelAndView.setViewName("index");
             modelAndView.addObject("securityName","12212");
+            modelAndView.addObject("loginError","账号密码错误");
         }
 
         return modelAndView;

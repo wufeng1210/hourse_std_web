@@ -26,7 +26,7 @@ public class UserAuthProvider {
 	public String queryList(UserAuth UserAuth){
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT * ");
-		sql.append(" FROM User_Auth WHERE ");
+		sql.append(" FROM user_auth WHERE ");
 		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(UserAuth,"authId"));
 		if(-1 != UserAuth.getAuthId()){
 			sql.append(" and authId = " + UserAuth.getAuthId());
@@ -37,7 +37,7 @@ public class UserAuthProvider {
 	public String count(UserAuth UserAuth){
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT count(*) ");
-		sql.append(" FROM User_Auth WHERE ");
+		sql.append(" FROM user_auth WHERE ");
 		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(UserAuth,"authId"));
 		if(-1 != UserAuth.getAuthId()){
 			sql.append(" and authId = " + UserAuth.getAuthId());
@@ -46,11 +46,11 @@ public class UserAuthProvider {
 	}
 
 	public String save(UserAuth UserAuth){
-		return SqlProviderUtil.provideInsertNotBlankWithout(UserAuth, "User_Auth","authId");
+		return SqlProviderUtil.provideInsertNotBlankWithout(UserAuth, "user_auth","authId");
 	}
 
 	public String update(UserAuth UserAuth){
-		StringBuffer sql = new StringBuffer(" UPDATE User_Auth ");
+		StringBuffer sql = new StringBuffer(" UPDATE user_auth ");
 		sql.append(SqlProviderUtil.provideSetterNotBlank(UserAuth));
 		sql.append(" WHERE ");
 		sql.append("authId=#{authId}");
@@ -59,7 +59,7 @@ public class UserAuthProvider {
 
 	public String delete(String authIds){
 		StringBuffer sql = new StringBuffer();
-		sql.append(" delete from User_Auth ");
+		sql.append(" delete from user_auth ");
 		sql.append(" where authId in ( "+ authIds + ")");
 		return sql.toString();
 	}
