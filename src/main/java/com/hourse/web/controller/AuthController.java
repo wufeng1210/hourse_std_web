@@ -59,14 +59,11 @@ public class AuthController {
     }
     @ResponseBody
     @RequestMapping("list")
-    public Map<String,Object> list(int authId,String authName) {
+    public Map<String,Object> list(UserAuth userAuth) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            UserAuth qryUserAuth = new UserAuth();
-            qryUserAuth.setAuthId(authId);
-            qryUserAuth.setAuthName(authName);
-            List<UserAuth> userAuthList = userAuthService.queryList(qryUserAuth);
-            int total = userAuthService.count(qryUserAuth);
+            List<UserAuth> userAuthList = userAuthService.queryList(userAuth);
+            int total = userAuthService.count(userAuth);
             resMap.put("total", total);
             resMap.put("rows",userAuthList);
         }catch (Exception e){
@@ -77,17 +74,14 @@ public class AuthController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(int authId,String authName) {
+    public Map<String,Object> saveOrUpdate(UserAuth userAuth) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
-            UserAuth opUserAuth = new UserAuth();
-            opUserAuth.setAuthId(authId);
-            opUserAuth.setAuthName(authName);
-            if( -1 != authId){
-                saveNums=userAuthService.update(opUserAuth);
+            if( -1 != userAuth.getAuthId()){
+                saveNums=userAuthService.update(userAuth);
             }else{
-                saveNums=userAuthService.save(opUserAuth);
+                saveNums=userAuthService.save(userAuth);
             }
             if(saveNums>0){
                 resMap.put("success", true);

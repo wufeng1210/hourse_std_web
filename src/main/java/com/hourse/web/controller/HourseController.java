@@ -40,13 +40,11 @@ public class HourseController {
     }
     @ResponseBody
     @RequestMapping("list")
-    public Map<String,Object> list(int hourseId) {
+    public Map<String,Object> list(Hourse hourse) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            Hourse qryHourse = new Hourse();
-            qryHourse.setHourseId(hourseId);
-            qryHourse.setStatus("1");
-            List<Hourse> hourseList = hourseService.queryList(qryHourse);
+            hourse.setStatus("1");
+            List<Hourse> hourseList = hourseService.queryList(hourse);
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(Hourse h:hourseList){
                 Map<String,Object> m = MapUtil.toMap(h);
@@ -57,7 +55,7 @@ public class HourseController {
                 m.put("isLendStr", StringUtil.yes_no_map.get(h.getIsLend()));//是否已出租
                 resList.add(m);
             }
-            int total = hourseService.count(qryHourse);
+            int total = hourseService.count(hourse);
             resMap.put("total", total);
             resMap.put("rows",resList);
         }catch (Exception e){
@@ -68,16 +66,14 @@ public class HourseController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(int hourseId) {
+    public Map<String,Object> saveOrUpdate(Hourse hourse) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
-            Hourse qryHourse = new Hourse();
-            qryHourse.setHourseId(hourseId);
-            if( -1 != hourseId){
-                saveNums=hourseService.update(qryHourse);
+            if( -1 != hourse.getHourseId()){
+                saveNums=hourseService.update(hourse);
             }else{
-                saveNums=hourseService.save(qryHourse);
+                saveNums=hourseService.save(hourse);
             }
             if(saveNums>0){
                 resMap.put("success", true);

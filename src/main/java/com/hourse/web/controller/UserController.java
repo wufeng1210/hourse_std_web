@@ -42,20 +42,17 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping("list")
-    public Map<String,Object> list(int userId, String userName) {
+    public Map<String,Object> list(User user) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            User qryUser = new User();
-            qryUser.setUserId(userId);
-            qryUser.setUserName(userName);
-            List<User> userList = userService.queryList(qryUser);
+            List<User> userList = userService.queryList(user);
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(User u : userList){
                 Map<String,Object> m = MapUtil.toMap(u);
                 m.put("roleName",userRoleService.query(u.getRoleId()).getRoleName());
                 resList.add(m);
             }
-            int total = userService.count(qryUser);
+            int total = userService.count(user);
             resMap.put("total", total);
             resMap.put("rows",resList);
         }catch (Exception e){
@@ -66,21 +63,16 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(int userId, String userName,String userPassWord,int roleId) {
+    public Map<String,Object> saveOrUpdate(User user) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
-            User opUser = new User();
-            opUser.setUserId(userId);
-            opUser.setUserName(userName);
-            opUser.setUserPassWord(userPassWord);
-            opUser.setUserType("0");
-            opUser.setSecretKey(userPassWord);
-            opUser.setRoleId(roleId);
-            if( -1 != userId){
-                saveNums=userService.update(opUser);
+            user.setUserType("0");
+            user.setSecretKey(user.getUserPassWord());
+            if( -1 != user.getUserId()){
+                saveNums=userService.update(user);
             }else{
-                saveNums=userService.save(opUser);
+                saveNums=userService.save(user);
             }
             if(saveNums>0){
                 resMap.put("success", true);

@@ -195,6 +195,9 @@
             <div align="center" style="">
                 <font color="blue" size="10">欢迎使用</font><br>
             </div>
+            <div style="width: 100%;">
+                <img width="100%" src="/page/assets/img/home.jpg">
+            </div>
         </div>
     </div>
 </div>

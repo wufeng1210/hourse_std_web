@@ -109,7 +109,7 @@
         url="/check/saveOrUpdate.do?hourseId="+row.hourseId;
     }
     function doCheckSuccess(){
-        url+="&state=1";
+        url+="&status=1";
         $("#fmCheck").form("submit",{
             url:url,
             onSubmit:function(){
@@ -131,7 +131,7 @@
         var brokerCode=$("#fmCheck").find("#brokerCode").val();
         var brokerName=$("#fmCheck").find("#brokerName").val();
         var brokerMobile=$("#fmCheck").find("#brokerMobile").val();
-        url+="&state=3";
+        url+="&status=3";
         $("#fmCheck").form("submit",{
             url:url,
             onSubmit:function(){
