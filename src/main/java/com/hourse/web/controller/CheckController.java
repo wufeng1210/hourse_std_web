@@ -44,13 +44,13 @@ public class CheckController {
         try{
             Hourse qryHourse = new Hourse();
             qryHourse.setHourseId(hourseId);
-            qryHourse.setState("0");
+            qryHourse.setStatus("0");
             List<Hourse> hourseList = hourseService.queryList(qryHourse);
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(Hourse h:hourseList){
                 Map<String,Object> m = MapUtil.toMap(h);
                 m.put("userName",userService.query(h.getUserId()).getUserName());
-                m.put("statusStr", StringUtil.translateStatus(h.getState()));
+                m.put("statusStr", StringUtil.translateStatus(h.getStatus()));
                 resList.add(m);
             }
             int total = hourseService.count(qryHourse);
@@ -70,7 +70,7 @@ public class CheckController {
             int saveNums = 0;
             Hourse qryHourse = new Hourse();
             qryHourse.setHourseId(hourseId);
-            qryHourse.setState(state);
+            qryHourse.setStatus(state);
             if( -1 != hourseId){
                 saveNums=hourseService.update(qryHourse);
             }else{

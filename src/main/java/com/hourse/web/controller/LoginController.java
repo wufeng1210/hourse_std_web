@@ -50,6 +50,12 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         HttpSession session=request.getSession();
         String imageCode=request.getParameter("Captcha");
+        if(null == session || null == session.getAttribute("sRand") || null == imageCode){
+            modelAndView.setViewName("index");
+            modelAndView.addObject("securityName","12212");
+            return modelAndView;
+        }
+
         if(!imageCode.equals(session.getAttribute("sRand"))){
             modelAndView.setViewName("index");
             modelAndView.addObject("securityName","12212");

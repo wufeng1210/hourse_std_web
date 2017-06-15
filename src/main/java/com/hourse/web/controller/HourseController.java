@@ -45,13 +45,13 @@ public class HourseController {
         try{
             Hourse qryHourse = new Hourse();
             qryHourse.setHourseId(hourseId);
-            qryHourse.setState("1");
+            qryHourse.setStatus("1");
             List<Hourse> hourseList = hourseService.queryList(qryHourse);
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(Hourse h:hourseList){
                 Map<String,Object> m = MapUtil.toMap(h);
                 m.put("userName",userService.query(h.getUserId()).getUserName());
-                m.put("statusStr", StringUtil.translateStatus(h.getState()));//状态
+                m.put("statusStr", StringUtil.translateStatus(h.getStatus()));//状态
                 m.put("packingingLotStr", StringUtil.yes_no_map.get(""+h.getPackingingLot()));//是否有车位
                 m.put("recommendStr", StringUtil.yes_no_map.get(h.getRecommend()));//是否推荐
                 m.put("isLendStr", StringUtil.yes_no_map.get(h.getIsLend()));//是否已出租

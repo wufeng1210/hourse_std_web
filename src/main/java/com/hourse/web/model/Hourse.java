@@ -30,10 +30,13 @@ public class Hourse {
     private String furniture;
     private String near;
     private String traffic;
-    private String state;
+    private String status;
     private String description;
     private String recommend;
     private String isLend;
+    private String orientations;
+    private String floor;
+    private String collect;
 
     public int getHourseId() {
         return hourseId;
@@ -243,12 +246,12 @@ public class Hourse {
         this.traffic = traffic;
     }
 
-    public String getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getDescription() {
@@ -273,5 +276,29 @@ public class Hourse {
 
     public void setIsLend(String isLend) {
         this.isLend = isLend;
+    }
+
+    public String getOrientations() {
+        return orientations;
+    }
+
+    public void setOrientations(String orientations) {
+        this.orientations = orientations;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public String getCollect() {
+        return collect;
+    }
+
+    public void setCollect(String collect) {
+        this.collect = collect;
     }
 }
