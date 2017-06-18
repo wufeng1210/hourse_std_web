@@ -7,6 +7,7 @@ import com.hourse.web.service.IUserRoleService;
 import com.hourse.web.service.IUserService;
 import com.hourse.web.util.MapUtil;
 import com.hourse.web.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +49,18 @@ public class HourseController {
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(Hourse h:hourseList){
                 Map<String,Object> m = MapUtil.toMap(h);
-                m.put("userName",userService.query(h.getUserId()).getUserName());
+                m.put("userName",null == userService.query(h.getUserId())? "":userService.query(h.getUserId()).getUserName());
                 m.put("statusStr", StringUtil.translateStatus(h.getStatus()));//状态
                 m.put("packingingLotStr", StringUtil.yes_no_map.get(""+h.getPackingingLot()));//是否有车位
                 m.put("recommendStr", StringUtil.yes_no_map.get(h.getRecommend()));//是否推荐
                 m.put("isLendStr", StringUtil.yes_no_map.get(h.getIsLend()));//是否已出租
+                String[] preLendUserId = h.getPreLendUserId().split(",");
+                String preLendMobile = "";
+                for(String s : preLendUserId){
+                    preLendMobile += null == userService.query(Integer.parseInt(s))? "":userService.query(Integer.parseInt(s)).getMobile() + ",";
+                }
+                m.put("preLendMobile",preLendMobile);
+                m.put("nowLendMobile",null == userService.query(Integer.parseInt(h.getNowLendUserId()))? "":userService.query(Integer.parseInt(h.getNowLendUserId())).getMobile());
                 resList.add(m);
             }
             int total = hourseService.count(hourse);

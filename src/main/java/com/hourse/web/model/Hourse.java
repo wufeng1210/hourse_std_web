@@ -37,6 +37,8 @@ public class Hourse {
     private String orientations;
     private String floor;
     private String collect;
+    private String preLendUserId;
+    private String nowLendUserId;
 
     public int getHourseId() {
         return hourseId;
@@ -300,5 +302,21 @@ public class Hourse {
 
     public void setCollect(String collect) {
         this.collect = collect;
+    }
+
+    public String getPreLendUserId() {
+        return preLendUserId;
+    }
+
+    public void setPreLendUserId(String preLendUserId) {
+        this.preLendUserId = preLendUserId;
+    }
+
+    public String getNowLendUserId() {
+        return nowLendUserId;
+    }
+
+    public void setNowLendUserId(String nowLendUserId) {
+        this.nowLendUserId = nowLendUserId;
     }
 }

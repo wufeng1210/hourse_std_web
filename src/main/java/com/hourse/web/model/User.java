@@ -14,6 +14,10 @@ public class User {
     private String userDescription;
     private String deptName;
     private String agent;
+    private String mobile;
+    private String NAME;
+    private String qq;
+    private String wechat;
 
     public int getUserId() {
         return userId;
@@ -85,5 +89,37 @@ public class User {
 
     public void setAgent(String agent) {
         this.agent = agent;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getNAME() {
+        return NAME;
+    }
+
+    public void setNAME(String NAME) {
+        this.NAME = NAME;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
     }
 }

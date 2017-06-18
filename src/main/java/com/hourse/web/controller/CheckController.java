@@ -47,7 +47,7 @@ public class CheckController {
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(Hourse h:hourseList){
                 Map<String,Object> m = MapUtil.toMap(h);
-                m.put("userName",userService.query(h.getUserId()).getUserName());
+                m.put("userName",null == userService.query(h.getUserId())? "":userService.query(h.getUserId()).getUserName());
                 m.put("statusStr", StringUtil.translateStatus(h.getStatus()));
                 resList.add(m);
             }

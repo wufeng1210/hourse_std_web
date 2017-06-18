@@ -131,6 +131,8 @@
         <th   data-options="field:'description',width:150" >描述</th>
         <th   data-options="field:'recommendStr',width:150" >是否推荐</th>
         <th   data-options="field:'isLendStr',width:150" >是否已出租</th>
+        <th   data-options="field:'preLendMobile',width:150" >预租人联系方式</th>
+        <th   data-options="field:'nowLendMobile',width:150" >已经租人联系方式</th>
 
         <th   data-options="field:'statusStr',width:150" >状态</th>
     </tr>
@@ -252,6 +254,14 @@
             <tr>
                 <td>是否已出租:</td>
                 <td><input type="text" id="isLendStr" name="isLendStr" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>预租人联系方式:</td>
+                <td><input type="text" id="preLendMobile" name="preLendMobile" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>已租人联系方式:</td>
+                <td><input type="text" id="nowLendMobile" name="nowLendMobile" class="easyui-validatebox" required="true"/></td>
             </tr>
 
         </table>

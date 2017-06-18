@@ -42,12 +42,12 @@ public class ActivityController {
     public Map<String,Object> list(ActivityInfo activityInfo) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            activityInfo.setState("0");
+            activityInfo.setStaus("0");
             List<ActivityInfo> activityList = activityService.queryList(activityInfo);
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(ActivityInfo a:activityList){
                 Map<String,Object> m = MapUtil.toMap(a);
-                m.put("statusStr", StringUtil.translateStatus(a.getState()));
+                m.put("statusStr", StringUtil.translateStatus(a.getStaus()));
                 resList.add(m);
             }
             int total = activityService.count(activityInfo);
@@ -65,7 +65,7 @@ public class ActivityController {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
-            activityInfo.setState("0");
+            activityInfo.setStaus("0");
             if( -1 != activityInfo.getActivityId()){
                 saveNums=activityService.update(activityInfo);
             }else{
