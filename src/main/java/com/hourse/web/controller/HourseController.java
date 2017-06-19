@@ -54,19 +54,27 @@ public class HourseController {
                 m.put("packingingLotStr", StringUtil.yes_no_map.get(""+h.getPackingingLot()));//是否有车位
                 m.put("recommendStr", StringUtil.yes_no_map.get(h.getRecommend()));//是否推荐
                 m.put("isLendStr", StringUtil.yes_no_map.get(h.getIsLend()));//是否已出租
-                String[] preLendUserId = h.getPreLendUserId().split(",");
+                String preLendUserId = null== h.getPreLendUserId()?"":h.getPreLendUserId();
+                String[] preLendUserIdStr = preLendUserId.trim().split(",", -1);
                 String preLendMobile = "";
-                for(String s : preLendUserId){
-                    preLendMobile += null == userService.query(Integer.parseInt(s))? "":userService.query(Integer.parseInt(s)).getMobile() + ",";
+                for(String s : preLendUserIdStr) {
+                    if (StringUtils.isNotBlank(s)) {
+                        preLendMobile += null == userService.query(Integer.parseInt(s)) ? "" : userService.query(Integer.parseInt(s)).getMobile() + ",";
+                    }
                 }
                 m.put("preLendMobile",preLendMobile);
-                m.put("nowLendMobile",null == userService.query(Integer.parseInt(h.getNowLendUserId()))? "":userService.query(Integer.parseInt(h.getNowLendUserId())).getMobile());
+                String nowLendUserId = null== h.getNowLendUserId()?"":h.getNowLendUserId();
+                String nowLendMobile = "";
+                if (StringUtils.isNotBlank(nowLendUserId)) {
+                    nowLendMobile = null == userService.query(Integer.parseInt(h.getNowLendUserId()))? "":userService.query(Integer.parseInt(h.getNowLendUserId())).getMobile();
+                }
+                m.put("nowLendMobile",nowLendMobile);
                 resList.add(m);
             }
             int total = hourseService.count(hourse);
             resMap.put("total", total);
             resMap.put("rows",resList);
-        }catch (Exception e){
+         }catch (Exception e){
 
         }
         return resMap;
