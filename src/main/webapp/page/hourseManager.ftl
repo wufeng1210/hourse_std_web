@@ -131,8 +131,8 @@
         <th   data-options="field:'description',width:150" >描述</th>
         <th   data-options="field:'recommendStr',width:150" >是否推荐</th>
         <th   data-options="field:'isLendStr',width:150" >是否已出租</th>
-        <th   data-options="field:'preLendMobile',width:150" >预租人联系方式</th>
-        <th   data-options="field:'nowLendMobile',width:150" >已经租人联系方式</th>
+        <th   data-options="field:'preLendUserMobile',width:150" >预租人联系方式</th>
+        <th   data-options="field:'nowLendUserMobile',width:150" >已租人联系方式</th>
 
         <th   data-options="field:'statusStr',width:150" >状态</th>
     </tr>
@@ -141,7 +141,7 @@
 
 <div id="tb">
     <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openAddDialog()">添加 </a>-->
-    <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改 </a>-->
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改房屋出租信息</a>
     <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>-->
 <div>
     &nbsp;用户编号：<input type="text" name="userId" id="userId" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
@@ -157,7 +157,7 @@
                 <td>房屋编号:</td>
                 <td><input type="text" id="hourseId" name="hourseId" class="easyui-validatebox" required="true"/></td>
             </tr>
-            <tr>
+            <#--<tr>
                 <td>用户编号:</td>
                 <td><input type="text" id="userId" name="userId" class="easyui-validatebox" required="true"/></td>
             </tr>
@@ -246,22 +246,32 @@
             <tr>
                 <td>描述:</td>
                 <td><input type="text" id="description" name="description" class="easyui-validatebox" required="true"/></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>是否推荐:</td>
-                <td><input type="text" id="recommendStr" name="recommendStr" class="easyui-validatebox" required="true"/></td>
+                <td>
+                    <select class="easyui-combobox" name="recommend" id="recommend" style="width:100">
+                        <option value="1">推荐</option>
+                        <option value="0">不推荐</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>是否已出租:</td>
-                <td><input type="text" id="isLendStr" name="isLendStr" class="easyui-validatebox" required="true"/></td>
+                <td>
+                    <select class="easyui-combobox" name="isLend" id="isLend" style="width:100">
+                        <option value="1">出租</option>
+                        <option value="0">未出租</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>预租人联系方式:</td>
-                <td><input type="text" id="preLendMobile" name="preLendMobile" class="easyui-validatebox" required="true"/></td>
+                <td><input type="text" id="preLendUserMobile" name="preLendUserMobile" class="easyui-validatebox" required="true"/></td>
             </tr>
             <tr>
                 <td>已租人联系方式:</td>
-                <td><input type="text" id="nowLendMobile" name="nowLendMobile" class="easyui-validatebox" required="true"/></td>
+                <td><input type="text" id="nowLendUserMobile" name="nowLendUserMobile" class="easyui-validatebox" required="true"/></td>
             </tr>
 
         </table>
