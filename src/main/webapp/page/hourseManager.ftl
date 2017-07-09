@@ -96,6 +96,50 @@
 
     }
 
+    function openUploadFileDialog(){
+ //       $.post("/session?action=testid",{},function(result){
+ //           if(result.role=="超级管理员"||result.role=="管理员"){
+  //              $("#dlg2").dialog('open').dialog('setTitle','批量导入');
+  //          }else{
+   //             //alert(result.success);
+  //              $.messager.alert('系统提示',"对不起，您没上传的权限");
+   //         }
+   //     },"json");
+
+
+        $("#dlg2").dialog('open').dialog('setTitle','批量导入');
+
+    }
+    function openUpload(){
+        $("#dlg2").dialog('open').dialog('setTitle','Excel上传');
+    }
+
+    function downloadTemplate(){
+        window.open('template/userExporTemplate.xlsx');
+    }
+
+    function uploadFile(){
+        //alert("yes");
+        $("#uploadForm").form("submit",{
+            url:"/hourse/fileupload.do",
+            onSubmit:function(){
+                return $(this).form("validate");
+            },
+            success:function(result){
+                var result=eval('('+result+')');
+                if(result.errorMsg){
+                    $.message.alert('系统提示','上传失败');
+                    return;
+                }else{
+                    $.messager.alert('系统提示','上传成功！');
+                    $("#dlg2").dialog("close");
+                    $("#dia").datagrid("reload");
+                }
+            }
+        });
+
+    }
+
 </script>
 </head>
 <body style="margin:1px;">
@@ -140,6 +184,8 @@
 </table>
 
 <div id="tb">
+    <#--<a href="javascript:exportExcel()" class="easyui-linkbutton" iconCls="icon-export" plain="true" >导出Excel表</a>-->
+    <a href="javascript:openUploadFileDialog()" class="easyui-linkbutton" iconCls="icon-import" plain="true" >导入Excel表</a>
     <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openAddDialog()">添加 </a>-->
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改房屋出租信息</a>
     <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>-->
@@ -282,20 +328,24 @@
     <a href="javascript:doSave()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
     <a href="javascript:closeAddDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
-<#--<div id="dlg2" class="easyui-dialog" style="width:500px;height:150px;padding:10px 20px"-->
-     <#--closed="true" buttons="#dlg2-buttons">-->
-    <#--<form id="uploadForm" method="post" enctype="multipart/form-data">-->
-        <#--<table>-->
-            <#--<tr>-->
-                <#--<td>上传文件</td>-->
-                <#--<td><input type="file" name="storeUploadFile"/>上传文件</td>-->
-            <#--</tr>-->
-        <#--</table>-->
-    <#--</form>-->
-<#--</div>-->
-<#--<div id="dlg2-buttons">-->
-    <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="uploadFile()">上传文件</a>-->
-    <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg2').dialog('close')">关闭</a>-->
-<#--</div>-->
+<div id="dlg2" class="easyui-dialog" style="width:550px;height:150px;padding:10px 20px"
+     closed="true" buttons="#dlg2-buttons">
+    <form id="uploadForm"  method="post" enctype="multipart/form-data" >
+        <table cellspacing="10px;">
+            <!-- <tr>
+                <td>上传文件</td>
+                 <td><a href="javascript:void(0)" class="easyui-linkbutton" onclick="downloadTemplate()">导入模板</a></td>
+            </tr> -->
+            <tr>
+                <td>上传文件：</td>
+                <td><input type="file" name="userUploadFile">上传文件</td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="dlg2-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="uploadFile()">上传文件</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg2').dialog('close')">关闭</a>
+</div>
 </body>
 </html>
