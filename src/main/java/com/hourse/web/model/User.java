@@ -18,6 +18,15 @@ public class User {
     private String NAME;
     private String qq;
     private String wechat;
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public int getUserId() {
         return userId;

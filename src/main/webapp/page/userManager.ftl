@@ -18,6 +18,11 @@
             userName:$("#userName").val()
         });
     }
+    //刷新
+    function doReload(){
+        $('#dia').datagrid('load',{
+        });
+    }
     function openAddDialog(){
         $("#dlg").dialog("open").dialog("setTitle","添加用户");
         url="/user/saveOrUpdate.do?userId=-1";
@@ -139,6 +144,7 @@
         <th   data-options="field:'userName',width:150" >用户姓名</th>
         <th   data-options="field:'userPassWord',width:150" >密码</th>
         <th   data-options="field:'roleName',width:150" >用户角色</th>
+        <th   data-options="field:'userDescription',width:150" >用户描述</th>
     </tr>
     </thead>
 </table>
@@ -147,6 +153,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openAddDialog()">添加 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="doReload()">刷新 </a>
 <div>
     &nbsp;用户名：<input type="text" name="userName" id="userName" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
 

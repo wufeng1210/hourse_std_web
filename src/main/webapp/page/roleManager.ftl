@@ -18,6 +18,11 @@
             roleName:$("#roleName").val()
         });
     }
+    //刷新
+    function doReload(){
+        $('#dia').datagrid('load',{
+        });
+    }
     function openAddDialog(){
         $("#dlg").dialog("open").dialog("setTitle","添加角色");
         url="/role/saveOrUpdate.do?roleId=-1";
@@ -175,6 +180,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>
     <a href="javascript:openAuthDialog()" class="easyui-linkbutton" iconCls="icon-roleManage" plain="true">角色授权</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="doReload()">刷新 </a>
 <div>
     &nbsp;角色名：<input type="text" name="roleName" id="roleName" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
 

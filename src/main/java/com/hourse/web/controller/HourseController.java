@@ -1,6 +1,7 @@
 package com.hourse.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hourse.web.http.HttpPostHandle;
 import com.hourse.web.model.Hourse;
 import com.hourse.web.model.UserRole;
 import com.hourse.web.service.IHourseService;
@@ -9,6 +10,7 @@ import com.hourse.web.service.IUserService;
 import com.hourse.web.util.ExcelUtil;
 import com.hourse.web.util.MapUtil;
 import com.hourse.web.util.StringUtil;
+import net.sf.json.JSONArray;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -172,49 +174,45 @@ public class HourseController {
                         continue;
                     }
                     //设置对象数据
-                    hourse.setUserId((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(1))));
-                    hourse.setHourseAddr(ExcelUtil.formateCell(xssfRow.getCell(2)));
-                    hourse.setLongitude(ExcelUtil.formateCell(xssfRow.getCell(3)));
-                    hourse.setLatitude(ExcelUtil.formateCell(xssfRow.getCell(4)));
-                    hourse.setProvince(ExcelUtil.formateCell(xssfRow.getCell(5)));
-                    hourse.setCity(ExcelUtil.formateCell(xssfRow.getCell(6)));
-                    hourse.setArea(ExcelUtil.formateCell(xssfRow.getCell(7)));
-                    hourse.setResidentialQuarters(ExcelUtil.formateCell(xssfRow.getCell(8)));
-                    hourse.setRoomNum((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(9))));
-                    hourse.setToiletNum((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(10))));
-                    hourse.setHallNum((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(11))));
-                    hourse.setKitchenNum((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(12))));
-                    hourse.setMonthly((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(13))));
-                    hourse.setPackingingLot((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(14))));
-                    hourse.setRentingWay(ExcelUtil.formateCell(xssfRow.getCell(15)));
-                    hourse.setLimitType(ExcelUtil.formateCell(xssfRow.getCell(16)));
-                    hourse.setFixtureType(ExcelUtil.formateCell(xssfRow.getCell(17)));
-                    String brokerMobile = ExcelUtil.formateCell(xssfRow.getCell(18));
+                    hourse.setUserId((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(0))));
+                    String hourseAddr = ExcelUtil.formateCell(xssfRow.getCell(1));
+                    hourse.setHourseAddr(hourseAddr);
+
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("address", hourseAddr);
+                    String jsonStr = HttpPostHandle.httpGetDirectionOfGaode(map);
+                    net.sf.json.JSONObject cityJson = net.sf.json.JSONObject.fromObject(jsonStr);
+                    JSONArray jsonArray = cityJson.optJSONArray("geocodes");
+                    String[] location = jsonArray.getJSONObject(0).getString("location").split(",");
+                    System.out.println(location[0]+"--"+location[1]);
+                    hourse.setLongitude(location[0]);
+                    hourse.setLatitude(location[1]);
+                    hourse.setProvince(ExcelUtil.formateCell(xssfRow.getCell(2)));
+                    hourse.setCity(ExcelUtil.formateCell(xssfRow.getCell(3)));
+                    hourse.setArea(ExcelUtil.formateCell(xssfRow.getCell(4)));
+                    hourse.setResidentialQuarters(ExcelUtil.formateCell(xssfRow.getCell(5)));
+                    hourse.setRoomNum((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(6))));
+                    hourse.setToiletNum((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(7))));
+                    hourse.setHallNum((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(8))));
+                    hourse.setMonthly((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(9))));
+                    hourse.setPackingingLot((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(10))));
+                    hourse.setRentingWay(ExcelUtil.formateCell(xssfRow.getCell(11)));
+                    hourse.setLimitType(ExcelUtil.formateCell(xssfRow.getCell(12)));
+                    hourse.setFixtureType(ExcelUtil.formateCell(xssfRow.getCell(13)));
+                    String brokerMobile = ExcelUtil.formateCell(xssfRow.getCell(14));
                     if(StringUtils.isNotBlank(brokerMobile)){
                         hourse.setBrokerMobile(new DecimalFormat("#").format(Double.parseDouble(brokerMobile)));
                     }
-                    hourse.setBrokerCode(ExcelUtil.formateCell(xssfRow.getCell(19)));
-                    hourse.setBrokerName(ExcelUtil.formateCell(xssfRow.getCell(20)));
-                    hourse.setAreaCovered(ExcelUtil.formateCell(xssfRow.getCell(21)));
-                    hourse.setSquarePrice(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(22)))));
-                    hourse.setFurniture(ExcelUtil.formateCell(xssfRow.getCell(23)));
-                    hourse.setNear(ExcelUtil.formateCell(xssfRow.getCell(24)));
-                    hourse.setTraffic(ExcelUtil.formateCell(xssfRow.getCell(25)));
-                    hourse.setStatus(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(26)))));
-                    hourse.setDescription(ExcelUtil.formateCell(xssfRow.getCell(27)));
-                    hourse.setRecommend(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(28)))));
-                    hourse.setIsLend(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(29)))));
-                    hourse.setOrientations(ExcelUtil.formateCell(xssfRow.getCell(30)));
-                    hourse.setFloor(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(31)))));
-                    hourse.setCollect(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(32)))));
-                    String preLendUserMobile = ExcelUtil.formateCell(xssfRow.getCell(33));
-                    if(StringUtils.isNotBlank(preLendUserMobile)){
-                        hourse.setPreLendUserMobile(new DecimalFormat("#").format(Double.parseDouble(preLendUserMobile)));
-                    }
-                    String nowBrokerMobile = ExcelUtil.formateCell(xssfRow.getCell(34));
-                    if(StringUtils.isNotBlank(nowBrokerMobile)){
-                        hourse.setNowLendUserMobile(new DecimalFormat("#").format(Double.parseDouble(nowBrokerMobile)));
-                    }
+                    hourse.setBrokerName(ExcelUtil.formateCell(xssfRow.getCell(15)));
+                    hourse.setAreaCovered(ExcelUtil.formateCell(xssfRow.getCell(16)));
+                    hourse.setSquarePrice(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(17)))));
+                    hourse.setFurniture(ExcelUtil.formateCell(xssfRow.getCell(18)));
+                    hourse.setNear(ExcelUtil.formateCell(xssfRow.getCell(19)));
+                    hourse.setTraffic(ExcelUtil.formateCell(xssfRow.getCell(20)));
+                    hourse.setStatus(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(21)))));
+                    hourse.setRecommend(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(22)))));
+                    hourse.setOrientations(ExcelUtil.formateCell(xssfRow.getCell(23)));
+                    hourse.setFloor(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(24)))));
                     int saveNums = 0;
                     saveNums=hourseService.save(hourse);
                     successNums += saveNums+1;

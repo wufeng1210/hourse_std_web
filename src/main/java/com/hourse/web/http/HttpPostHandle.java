@@ -228,16 +228,16 @@ public class HttpPostHandle {
 	public static void main(String[] a) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("location", "116.481488,39.990464");
-		System.out.println(httpGetAddressOfGaode(map));
+		//System.out.println(httpGetAddressOfGaode(map));
 		String jsonStr = HttpPostHandle.httpGetAddressOfGaode(map);
 		JSONObject cityJson = JSONObject.fromObject(jsonStr);
 		JSONObject jsonObject = cityJson.optJSONObject("regeocode").optJSONObject("addressComponent");
 		String province = jsonObject.getString("province");
 		String city = jsonObject.getString("city");
 		String district = jsonObject.getString("district");
-		System.out.println(province);
-		System.out.println(city);
-		System.out.println(district);
+		//System.out.println(province);
+		//System.out.println(city);
+		//System.out.println(district);
 		map = new HashMap<String, Object>();
 		map.put("address", "浙江省杭州市萧山区城厢街道萧西路同和公寓2幢一单元501");
 		System.out.println(httpGetDirectionOfGaode(map));

@@ -18,6 +18,11 @@
             activityTitle:$("#activityTitle").val()
         });
     }
+    //刷新
+    function doReload(){
+        $('#dia').datagrid('load',{
+        });
+    }
     function openAddDialog(){
         $("#dlg").dialog("open").dialog("setTitle","添加活动");
         url="/activity/saveOrUpdate.do?activityId=-1";
@@ -117,6 +122,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openAddDialog()">添加 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="doReload()">刷新 </a>
 <div>
     &nbsp;活动标题：<input type="text" name="activityTitle" id="activityTitle" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
 

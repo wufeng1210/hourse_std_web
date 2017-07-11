@@ -49,7 +49,10 @@ public class UserController {
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
             for(User u : userList){
                 Map<String,Object> m = MapUtil.toMap(u);
-                m.put("roleName",userRoleService.query(u.getRoleId()).getRoleName());
+                if(u.getRoleId() !=0) {
+                    m.put("roleName", userRoleService.query(u.getRoleId()).getRoleName());
+                }
+                m.put("userDescription", u.getUserDescription());
                 resList.add(m);
             }
             int total = userService.count(user);
