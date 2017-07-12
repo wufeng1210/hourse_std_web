@@ -51,8 +51,9 @@ public class UserController {
                 Map<String,Object> m = MapUtil.toMap(u);
                 if(u.getRoleId() !=0) {
                     m.put("roleName", userRoleService.query(u.getRoleId()).getRoleName());
+                }else{
+                    m.put("roleName", "前台用户");
                 }
-                m.put("userDescription", u.getUserDescription());
                 resList.add(m);
             }
             int total = userService.count(user);

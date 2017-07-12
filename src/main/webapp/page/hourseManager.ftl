@@ -319,11 +319,11 @@
             </tr>
             <tr>
                 <td>预租人联系方式:</td>
-                <td><input type="text" id="preLendUserMobile" name="preLendUserMobile" class="easyui-validatebox" required="true"/></td>
+                <td><input type="text" id="preLendUserMobile" name="preLendUserMobile" class="easyui-validatebox" /></td>
             </tr>
             <tr>
                 <td>已租人联系方式:</td>
-                <td><input type="text" id="nowLendUserMobile" name="nowLendUserMobile" class="easyui-validatebox" required="true"/></td>
+                <td><input type="text" id="nowLendUserMobile" name="nowLendUserMobile" class="easyui-validatebox" /></td>
             </tr>
 
         </table>

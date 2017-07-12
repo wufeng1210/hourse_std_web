@@ -141,10 +141,11 @@
     <tr>
         <th field="cb" checkbox="true" align="center"></th>
         <th   data-options="field:'userId',width:150" >用户编号</th>
-        <th   data-options="field:'userName',width:150" >用户姓名</th>
+        <th   data-options="field:'userName',width:150" >用户名</th>
         <th   data-options="field:'userPassWord',width:150" >密码</th>
         <th   data-options="field:'roleName',width:150" >用户角色</th>
-        <th   data-options="field:'userDescription',width:150" >用户描述</th>
+        <th   data-options="field:'nickName',width:150" >用户昵称</th>
+        <th   data-options="field:'NAME',width:150" >用户姓名</th>
     </tr>
     </thead>
 </table>

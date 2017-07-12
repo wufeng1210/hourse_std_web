@@ -11,6 +11,7 @@
         src="../page/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 <script type="text/javascript"
         src="../page/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../page/assets/js/LocalResizeIMG/lrz.bundle.js"></script>
 <script type="text/javascript">
     function doSearch(){
         $("#dia").datagrid('load',{
@@ -36,6 +37,7 @@
         var row=selectedRows[0];
         $("#dlg").dialog("open").dialog("setTitle","修改活动信息");
         $("#fm").form("load",row);
+        $(".upload img").attr("src",row.activityImagePath);
         $("#activity").attr("readonly","readonly");
         //alert(row.activityid);
         url="/activity/saveOrUpdate.do?activityId="+row.activityId;
@@ -129,7 +131,7 @@
     <a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 </div>
 </div>
-<div id="dlg" class="easyui-dialog" style="width:500px;height:400px;padding:10px 20px"
+<div id="dlg" class="easyui-dialog" style="width:700px;height:400px;padding:10px 20px"
      closed="true" buttons="#dlg-buttons">
     <form id="fm" method="post">
         <table>
@@ -139,7 +141,16 @@
             </tr>
             <tr>
                 <td>活动图片路径:</td>
-                <td><input type="text" id="activityImagePath" name="activityImagePath" class="easyui-validatebox" required="true"/></td>
+                <td>
+                    <input name="imageBases" type="hidden">
+                    <div class="images">
+                        <div class="upload">
+                            <img src="../page/assets/img/add.png" alt="图片" style="width: 40%">
+                            <input type="file" id="uploadImage" accept="image/*">
+                        </div>
+                    </div>
+                </td>
+                <#--<td><input type="text" id="activityImagePath" name="activityImagePath" class="easyui-validatebox" required="true"/></td>-->
             </tr>
             <tr>
                 <td>活动图片地址:</td>
@@ -154,4 +165,14 @@
     <a href="javascript:closeAddDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
 </body>
+<script>
+    $(document).on("change", "input[type=file]", function(){
+        lrz(this.files[0])
+                .then(function(result){
+                    var img_info = result.base64.split(',');
+                    $("input[name=imageBases]").val(encodeURIComponent(img_info[1]));
+                    $(".upload img").attr("src",result.base64);
+                })
+    })
+</script>
 </html>
