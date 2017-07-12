@@ -13,12 +13,12 @@ public class Hourse {
     private String city;
     private String area;
     private String residentialQuarters;
-    private int roomNum;
-    private int toiletNum;
-    private int hallNum;
-    private int kitchenNum;
-    private int monthly;
-    private int packingingLot;
+    private String roomNum;
+    private String toiletNum;
+    private String hallNum;
+    private String kitchenNum;
+    private String monthly;
+    private String packingingLot;
     private String rentingWay;
     private String limitType;
     private String fixtureType;
@@ -112,51 +112,51 @@ public class Hourse {
         this.residentialQuarters = residentialQuarters;
     }
 
-    public int getRoomNum() {
+    public String getRoomNum() {
         return roomNum;
     }
 
-    public void setRoomNum(int roomNum) {
+    public void setRoomNum(String roomNum) {
         this.roomNum = roomNum;
     }
 
-    public int getToiletNum() {
+    public String getToiletNum() {
         return toiletNum;
     }
 
-    public void setToiletNum(int toiletNum) {
+    public void setToiletNum(String toiletNum) {
         this.toiletNum = toiletNum;
     }
 
-    public int getHallNum() {
+    public String getHallNum() {
         return hallNum;
     }
 
-    public void setHallNum(int hallNum) {
+    public void setHallNum(String hallNum) {
         this.hallNum = hallNum;
     }
 
-    public int getKitchenNum() {
+    public String getKitchenNum() {
         return kitchenNum;
     }
 
-    public void setKitchenNum(int kitchenNum) {
+    public void setKitchenNum(String kitchenNum) {
         this.kitchenNum = kitchenNum;
     }
 
-    public int getMonthly() {
+    public String getMonthly() {
         return monthly;
     }
 
-    public void setMonthly(int monthly) {
+    public void setMonthly(String monthly) {
         this.monthly = monthly;
     }
 
-    public int getPackingingLot() {
+    public String getPackingingLot() {
         return packingingLot;
     }
 
-    public void setPackingingLot(int packingingLot) {
+    public void setPackingingLot(String packingingLot) {
         this.packingingLot = packingingLot;
     }
 
