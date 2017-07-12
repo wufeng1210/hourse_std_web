@@ -11,6 +11,7 @@
         src="../page/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 <script type="text/javascript"
         src="../page/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../page/assets/js/LocalResizeIMG/lrz.bundle.js"></script>
 <script type="text/javascript">
     function doSearch(){
         $("#dia").datagrid('load',{
@@ -41,6 +42,7 @@
         //alert(row.hourseId);
         url="/hourse/saveOrUpdate.do?hourseId="+row.hourseId;
     }
+
     //保存
     function doSave(){
 
@@ -64,6 +66,43 @@
     function closeAddDialog(){
         $("#dlg").dialog("close");
         $("#fm").form('clear');
+    }
+
+    function openUploadDialog(){
+        var selectedRows=$("#dia").datagrid('getSelections');
+        if(selectedRows.length!=1){
+            $.messager.alert('系统提示','请选择一条要编辑的数据！');
+            return;
+        }
+        var row=selectedRows[0];
+        $("#dlg3").dialog("open").dialog("setTitle","上传");
+        $("#fm3").form("load",row);
+        //alert(row.hourseId);
+        url="/hourse/saveOrUpdate.do?hourseId="+row.hourseId;
+    }
+    //保存
+    function doSaveUpload(){
+
+        $("#fm3").form("submit",{
+            url:url,
+            onSubmit:function(){
+
+                return $(this).form("validate");
+            },
+            success:function(result){
+                if(result.errorMsg){
+                    $.messager.alert('系统提示',"<font color=red>"+result.errorMsg+"</font>");
+                }else{
+                    $.messager.alert('系统提示','保存成功！');
+                    closeUploadDialog();
+                    $("#dia").datagrid("reload");
+                }
+            }
+        });
+    }
+    function closeUploadDialog(){
+        $("#dlg3").dialog("close");
+        $("#fm3").form('clear');
     }
     function doDelete(){
 //        $.post("/deleteUser.do?user_id=testid",{},function(result){
@@ -191,7 +230,7 @@
 <div id="tb">
     <#--<a href="javascript:exportExcel()" class="easyui-linkbutton" iconCls="icon-export" plain="true" >导出Excel表</a>-->
     <a href="javascript:openUploadFileDialog()" class="easyui-linkbutton" iconCls="icon-import" plain="true" >导入Excel表</a>
-    <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openAddDialog()">添加 </a>-->
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openUploadDialog()">上传房屋图片 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改房屋出租信息</a>
     <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>-->
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="doReload()">刷新 </a>
@@ -353,5 +392,42 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="uploadFile()">上传文件</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg2').dialog('close')">关闭</a>
 </div>
+
+<div id="dlg3" class="easyui-dialog" style="width:700px;height:400px;padding:10px 20px"
+     closed="true" buttons="#dlg3-buttons">
+    <form id="fm3" method="post">
+        <table>
+            <tr>
+                <td>活动图片路径:</td>
+                <td>
+                    <input name="imageBases" type="hidden">
+                    <div class="images">
+                        <div class="upload">
+                            <img src="../page/assets/img/add.png" alt="图片" style="width: 40%">
+                            <input type="file" id="uploadImage" accept="image/*">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+<div id="dlg3-buttons">
+    <a href="javascript:doSaveUpload()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+    <a href="javascript:closeUploadDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+</div>
+
 </body>
+<script>
+    $(document).on("change", "input[type=file]", function(){
+        lrz(this.files[0])
+                .then(function(result){
+                    var img_info = result.base64.split(',');
+                    $("input[name=imageBases]").val(encodeURIComponent(img_info[1])+","+ $("input[name=imageBases]").val());
+                    $(".upload").prepend("<img src='"+result.base64+"'  style='width: 40%'>");
+                })
+    })
+</script>
 </html>

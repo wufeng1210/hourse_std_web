@@ -2,9 +2,12 @@ package com.hourse.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hourse.web.http.HttpPostHandle;
+import com.hourse.web.model.ActivityInfo;
 import com.hourse.web.model.Hourse;
+import com.hourse.web.model.ImageInfo;
 import com.hourse.web.model.UserRole;
 import com.hourse.web.service.IHourseService;
+import com.hourse.web.service.IImageInfoService;
 import com.hourse.web.service.IUserRoleService;
 import com.hourse.web.service.IUserService;
 import com.hourse.web.util.ExcelUtil;
@@ -52,6 +55,8 @@ public class HourseController {
     private IHourseService hourseService;
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IImageInfoService iImageInfoService;
 
 
     @RequestMapping("manager")
@@ -90,7 +95,7 @@ public class HourseController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(Hourse hourse) {
+    public Map<String,Object> saveOrUpdate(Hourse hourse,String imageBases) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
@@ -99,9 +104,13 @@ public class HourseController {
             }else{
                 saveNums=hourseService.save(hourse);
             }
+            Hourse temp = hourseService.queryList(hourse).get(0);
+            iImageInfoService.delete(String.valueOf(temp.getHourseId()));
+            ImageInfo imageInfo = new ImageInfo();
+            imageInfo.setHourseId(String.valueOf(temp.getHourseId()));
+            String path = iImageInfoService.insertImageInfo(imageBases,imageInfo);
             if(saveNums>0){
                 resMap.put("success", true);
-
             }else{
                 resMap.put("success", false);
                 resMap.put("errorMsg", "保存失败");
