@@ -200,11 +200,11 @@ public class HourseController {
                     hourse.setCity(ExcelUtil.formateCell(xssfRow.getCell(3)));
                     hourse.setArea(ExcelUtil.formateCell(xssfRow.getCell(4)));
                     hourse.setResidentialQuarters(ExcelUtil.formateCell(xssfRow.getCell(5)));
-                    hourse.setRoomNum(String.valueOf(Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(6)))));
-                    hourse.setToiletNum(String.valueOf(Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(7)))));
-                    hourse.setHallNum(String.valueOf(Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(8)))));
-                    hourse.setMonthly(String.valueOf(Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(9)))));
-                    hourse.setPackingingLot(String.valueOf(Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(10)))));
+                    hourse.setRoomNum(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(6)))));
+                    hourse.setToiletNum(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(7)))));
+                    hourse.setHallNum(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(8)))));
+                    hourse.setMonthly(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(9)))));
+                    hourse.setPackingingLot(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(10)))));
                     hourse.setRentingWay(ExcelUtil.formateCell(xssfRow.getCell(11)));
                     hourse.setLimitType(ExcelUtil.formateCell(xssfRow.getCell(12)));
                     hourse.setFixtureType(ExcelUtil.formateCell(xssfRow.getCell(13)));
