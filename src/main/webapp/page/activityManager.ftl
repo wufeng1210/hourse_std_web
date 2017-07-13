@@ -154,10 +154,10 @@
                 </td>
                 <#--<td><input type="text" id="activityImagePath" name="activityImagePath" class="easyui-validatebox" required="true"/></td>-->
             </tr>
-            <tr>
-                <td>活动url地址:</td>
-                <td><input type="text" id="activityImageUrl" name="activityImageUrl" class="easyui-validatebox" required="true"/></td>
-            </tr>
+            <#--<tr>-->
+                <#--<td>活动url地址:</td>-->
+                <#--<td><input type="text" id="activityImageUrl" name="activityImageUrl" class="easyui-validatebox" required="true"/></td>-->
+            <#--</tr>-->
             <tr>
                 <td>状态:</td>
                 <td>

@@ -122,16 +122,17 @@ public class HourseController {
     public Map<String,Object> uploadImg(Hourse hourse,String imageBases) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            String path = "";
+            ImageInfo info = new ImageInfo();
             if(StringUtils.isNotBlank(imageBases)){
                 Hourse temp = hourseService.queryList(hourse).get(0);
                 iImageInfoService.delete(String.valueOf(temp.getHourseId()));
                 ImageInfo imageInfo = new ImageInfo();
                 imageInfo.setHourseId(String.valueOf(temp.getHourseId()));
-                path = iImageInfoService.insertImageInfo(imageBases,imageInfo);
+                info = iImageInfoService.insertImageInfo(imageBases,imageInfo);
             }
 
-            if(StringUtils.isNotBlank(path)){
+            if(info!=null && info.getImagePath() !=null && info.getImageUrl()!=null &&
+                    StringUtils.isNotBlank(info.getImagePath()) && StringUtils.isNotBlank(info.getImageUrl()) ){
                 resMap.put("success", true);
             }else{
                 resMap.put("success", false);

@@ -34,7 +34,7 @@ public class ImageInfoServiceImpl implements IImageInfoService {
     }
 
 
-    public String insertImageInfo(String imageBases, ImageInfo imageInfo) {
+    public ImageInfo insertImageInfo(String imageBases, ImageInfo imageInfo) {
         String path = "";
         try {
             String[] imageBase = imageBases.split(",");
@@ -57,7 +57,7 @@ public class ImageInfoServiceImpl implements IImageInfoService {
             e.printStackTrace();
             logger.error("添加图片信息失败",e);
         }
-        return path;
+        return imageInfo;
     }
 
     public int delete(String hourseIds) {

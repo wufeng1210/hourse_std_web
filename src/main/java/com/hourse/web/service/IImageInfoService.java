@@ -10,5 +10,5 @@ public interface IImageInfoService {
 
     int delete(String houeseIds);
 
-    public String insertImageInfo(String imageBase, ImageInfo imageInfo);
+    public ImageInfo insertImageInfo(String imageBase, ImageInfo imageInfo);
 }

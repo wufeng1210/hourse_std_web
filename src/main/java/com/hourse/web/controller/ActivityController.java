@@ -11,6 +11,7 @@ import com.hourse.web.util.ImageBase64Util;
 import com.hourse.web.util.MapUtil;
 import com.hourse.web.util.PropertiesUtils;
 import com.hourse.web.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,8 +84,12 @@ public class ActivityController {
             iImageInfoService.delete(String.valueOf(temp.getActivityId()));
             ImageInfo imageInfo = new ImageInfo();
             imageInfo.setHourseId(String.valueOf(temp.getActivityId()));
-            String path = iImageInfoService.insertImageInfo(imageBases,imageInfo);
-            temp.setActivityImagePath(path);
+            ImageInfo info = iImageInfoService.insertImageInfo(imageBases,imageInfo);
+            if(info!=null && info.getImagePath() !=null && info.getImageUrl()!=null &&
+                    StringUtils.isNotBlank(info.getImagePath()) && StringUtils.isNotBlank(info.getImageUrl()) ) {
+                temp.setActivityImagePath(info.getImagePath());
+                temp.setActivityImageUrl(info.getImageUrl());
+            }
             if(saveNums>0){
                 resMap.put("success", true);
                 activityService.update(temp);
