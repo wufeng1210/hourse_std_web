@@ -95,7 +95,7 @@ public class HourseController {
 
     @ResponseBody
     @RequestMapping("saveOrUpdate")
-    public Map<String,Object> saveOrUpdate(Hourse hourse,String imageBases) {
+    public Map<String,Object> saveOrUpdate(Hourse hourse) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
             int saveNums = 0;
@@ -104,12 +104,34 @@ public class HourseController {
             }else{
                 saveNums=hourseService.save(hourse);
             }
-            Hourse temp = hourseService.queryList(hourse).get(0);
-            iImageInfoService.delete(String.valueOf(temp.getHourseId()));
-            ImageInfo imageInfo = new ImageInfo();
-            imageInfo.setHourseId(String.valueOf(temp.getHourseId()));
-            String path = iImageInfoService.insertImageInfo(imageBases,imageInfo);
+
             if(saveNums>0){
+                resMap.put("success", true);
+            }else{
+                resMap.put("success", false);
+                resMap.put("errorMsg", "保存失败");
+            }
+        }catch (Exception e){
+
+        }
+        return resMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("uploadImg")
+    public Map<String,Object> uploadImg(Hourse hourse,String imageBases) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            String path = "";
+            if(StringUtils.isNotBlank(imageBases)){
+                Hourse temp = hourseService.queryList(hourse).get(0);
+                iImageInfoService.delete(String.valueOf(temp.getHourseId()));
+                ImageInfo imageInfo = new ImageInfo();
+                imageInfo.setHourseId(String.valueOf(temp.getHourseId()));
+                path = iImageInfoService.insertImageInfo(imageBases,imageInfo);
+            }
+
+            if(StringUtils.isNotBlank(path)){
                 resMap.put("success", true);
             }else{
                 resMap.put("success", false);
@@ -200,28 +222,25 @@ public class HourseController {
                     hourse.setCity(ExcelUtil.formateCell(xssfRow.getCell(3)));
                     hourse.setArea(ExcelUtil.formateCell(xssfRow.getCell(4)));
                     hourse.setResidentialQuarters(ExcelUtil.formateCell(xssfRow.getCell(5)));
-                    hourse.setRoomNum(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(6)))));
-                    hourse.setToiletNum(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(7)))));
-                    hourse.setHallNum(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(8)))));
-                    hourse.setMonthly(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(9)))));
-                    hourse.setPackingingLot(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(10)))));
-                    hourse.setRentingWay(ExcelUtil.formateCell(xssfRow.getCell(11)));
-                    hourse.setLimitType(ExcelUtil.formateCell(xssfRow.getCell(12)));
-                    hourse.setFixtureType(ExcelUtil.formateCell(xssfRow.getCell(13)));
-                    String brokerMobile = ExcelUtil.formateCell(xssfRow.getCell(14));
+                    hourse.setRoomNum(ExcelUtil.formateCell(xssfRow.getCell(6)));
+                    hourse.setToiletNum(ExcelUtil.formateCell(xssfRow.getCell(7)));
+                    hourse.setHallNum(ExcelUtil.formateCell(xssfRow.getCell(8)));
+                    hourse.setMonthly(ExcelUtil.formateCell(xssfRow.getCell(9)));
+                    hourse.setRentingWay(ExcelUtil.formateCell(xssfRow.getCell(10)));
+                    hourse.setLimitType(ExcelUtil.formateCell(xssfRow.getCell(11)));
+                    hourse.setFixtureType(ExcelUtil.formateCell(xssfRow.getCell(12)));
+                    String brokerMobile = ExcelUtil.formateCell(xssfRow.getCell(13));
                     if(StringUtils.isNotBlank(brokerMobile)){
                         hourse.setBrokerMobile(new DecimalFormat("#").format(Double.parseDouble(brokerMobile)));
                     }
-                    hourse.setBrokerName(ExcelUtil.formateCell(xssfRow.getCell(15)));
-                    hourse.setAreaCovered(ExcelUtil.formateCell(xssfRow.getCell(16)));
-                    hourse.setSquarePrice(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(17)))));
-                    hourse.setFurniture(ExcelUtil.formateCell(xssfRow.getCell(18)));
-                    hourse.setNear(ExcelUtil.formateCell(xssfRow.getCell(19)));
-                    hourse.setTraffic(ExcelUtil.formateCell(xssfRow.getCell(20)));
-                    hourse.setStatus(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(21)))));
-                    hourse.setRecommend(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(22)))));
-                    hourse.setOrientations(ExcelUtil.formateCell(xssfRow.getCell(23)));
-                    hourse.setFloor(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(24)))));
+                    hourse.setBrokerName(ExcelUtil.formateCell(xssfRow.getCell(14)));
+                    hourse.setAreaCovered(ExcelUtil.formateCell(xssfRow.getCell(15)));
+                    hourse.setSquarePrice(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(16)))));
+                    hourse.setFurniture(ExcelUtil.formateCell(xssfRow.getCell(17)));
+                    hourse.setNear(ExcelUtil.formateCell(xssfRow.getCell(18)));
+                    hourse.setTraffic(ExcelUtil.formateCell(xssfRow.getCell(19)));
+                    hourse.setOrientations(ExcelUtil.formateCell(xssfRow.getCell(20)));
+                    hourse.setFloor(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(21)))));
                     int saveNums = 0;
                     saveNums=hourseService.save(hourse);
                     successNums += saveNums+1;

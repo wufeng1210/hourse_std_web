@@ -25,6 +25,7 @@
         });
     }
     function openAddDialog(){
+        $(".upload img").attr("src","../page/assets/img/add.png");
         $("#dlg").dialog("open").dialog("setTitle","添加活动");
         url="/activity/saveOrUpdate.do?activityId=-1";
     }
@@ -115,7 +116,8 @@
         <th   data-options="field:'activityId',width:150" >活动编号</th>
         <th   data-options="field:'activityTitle',width:150" >活动标题</th>
         <th   data-options="field:'activityImagePath',width:150" >活动图片路径</th>
-        <th   data-options="field:'activityImageUrl',width:150" >活动图片地址</th>
+        <th   data-options="field:'activityImageUrl',width:150" >活动url地址</th>
+        <th   data-options="field:'statusStr',width:150" >状态</th>
     </tr>
     </thead>
 </table>
@@ -153,8 +155,17 @@
                 <#--<td><input type="text" id="activityImagePath" name="activityImagePath" class="easyui-validatebox" required="true"/></td>-->
             </tr>
             <tr>
-                <td>活动图片地址:</td>
+                <td>活动url地址:</td>
                 <td><input type="text" id="activityImageUrl" name="activityImageUrl" class="easyui-validatebox" required="true"/></td>
+            </tr>
+            <tr>
+                <td>状态:</td>
+                <td>
+                    <select class="easyui-combobox" name="STATUS" id="STATUS" style="width:100">
+                        <option value="1">有效</option>
+                        <option value="0">无效</option>
+                    </select>
+                </td>
             </tr>
         </table>
     </form>

@@ -74,11 +74,13 @@
             $.messager.alert('系统提示','请选择一条要编辑的数据！');
             return;
         }
+        $("input[name=imageBases]").val("");
+        $(".upload .tempImg").remove();
         var row=selectedRows[0];
         $("#dlg3").dialog("open").dialog("setTitle","上传");
         $("#fm3").form("load",row);
         //alert(row.hourseId);
-        url="/hourse/saveOrUpdate.do?hourseId="+row.hourseId;
+        url="/hourse/uploadImg.do?hourseId="+row.hourseId;
     }
     //保存
     function doSaveUpload(){
@@ -193,9 +195,10 @@
     <thead data-options="frozen:false">
     <tr>
         <th field="cb" checkbox="true" align="center"></th>
-        <th   data-options="field:'hourseId',width:150" >房屋编号</th>
-        <th   data-options="field:'userId',width:150" >用户编号</th>
+        <th   data-options="field:'hourseId',width:100" >房屋编号</th>
+        <th   data-options="field:'userId',width:100" >用户编号</th>
         <th   data-options="field:'userName',width:150" >用户名称</th>
+        <th   data-options="field:'hourseAddr',width:250" >房屋地址</th>
         <th   data-options="field:'province',width:150" >省份</th>
         <th   data-options="field:'city',width:150" >城市</th>
         <th   data-options="field:'area',width:150" >区域</th>
@@ -398,7 +401,7 @@
     <form id="fm3" method="post">
         <table>
             <tr>
-                <td>活动图片路径:</td>
+                <td>房屋图片路径:</td>
                 <td>
                     <input name="imageBases" type="hidden">
                     <div class="images">
@@ -426,7 +429,7 @@
                 .then(function(result){
                     var img_info = result.base64.split(',');
                     $("input[name=imageBases]").val(encodeURIComponent(img_info[1])+","+ $("input[name=imageBases]").val());
-                    $(".upload").prepend("<img src='"+result.base64+"'  style='width: 40%'>");
+                    $(".upload").prepend("<img class='tempImg' src='"+result.base64+"'  style='width: 40%'>");
                 })
     })
 </script>

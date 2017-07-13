@@ -41,4 +41,11 @@ public class StringUtil extends MapUtils {
 		}
 	};
 
+	public final static Map<String, String> valid_invalid_map = new HashMap<String, String>() {
+		{
+			put("1", "有效");
+			put("0", "无效");
+		}
+	};
+
 }
