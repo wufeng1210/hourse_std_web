@@ -130,27 +130,33 @@
 
 
     }
-
+    function exportExcel(){
+        window.open('/user/fileExport.do');
+    }
 </script>
 </head>
 <body style="margin:1px;">
 <table id="dia" class="easyui-datagrid" title="用户表" style="width:1150px;height:470px" toolbar="#tb"
        url="/user/list.do?userId=-1" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
        fit="true" idField="id">
-    <thead data-options="frozen:true">
+    <thead data-options="frozen:false">
     <tr>
         <th field="cb" checkbox="true" align="center"></th>
         <th   data-options="field:'userId',width:150" >用户编号</th>
         <th   data-options="field:'userName',width:150" >用户名</th>
         <th   data-options="field:'userPassWord',width:150" >密码</th>
         <th   data-options="field:'roleName',width:150" >用户角色</th>
-        <th   data-options="field:'nickName',width:150" >用户昵称</th>
+        <th   data-options="field:'mobile',width:150" >手机号</th>
         <th   data-options="field:'NAME',width:150" >用户姓名</th>
+        <th   data-options="field:'qq',width:150" >qq</th>
+        <th   data-options="field:'wechat',width:150" >微信</th>
+        <th   data-options="field:'nickName',width:150" >用户昵称</th>
     </tr>
     </thead>
 </table>
 
 <div id="tb">
+    <a href="javascript:exportExcel()" class="easyui-linkbutton" iconCls="icon-export" plain="true" >导出全部数据</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openAddDialog()">添加 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>
@@ -178,6 +184,26 @@
                 <td><input type="hidden" id="roleId" name="roleId" /><input type="text"  id="roleName" name="roleName"  readonly="readonly" class="easyui-validatebox" required="true"/></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td colspan="2"><a href="javascript:openRoleChooseDialog()"  class="easyui-linkbutton" >选择角色</a></td>
+            </tr>
+            <tr>
+                <td>手机号:</td>
+                <td><input type="text" id="mobile" name="mobile" class="easyui-validatebox" required="false"/></td>
+            </tr>
+            <tr>
+                <td>姓名:</td>
+                <td><input type="text" id="NAME" name="NAME" class="easyui-validatebox" required="false"/></td>
+            </tr>
+            <tr>
+                <td>qq:</td>
+                <td><input type="text" id="qq" name="qq" class="easyui-validatebox" required="false"/></td>
+            </tr>
+            <tr>
+                <td>微信:</td>
+                <td><input type="text" id="wechat" name="wechat" class="easyui-validatebox" required="false"/></td>
+            </tr>
+            <tr>
+                <td>昵称:</td>
+                <td><input type="text" id="nickName" name="nickName" class="easyui-validatebox" required="false"/></td>
             </tr>
         </table>
     </form>

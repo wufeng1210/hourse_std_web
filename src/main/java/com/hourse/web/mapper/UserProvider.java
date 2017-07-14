@@ -14,7 +14,7 @@ public class UserProvider {
 		sql.append(" SELECT * ");
 		sql.append(" FROM user_info WHERE ");
 		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(user,"userId","roleId"));
-		if(-1 != user.getUserId()){
+		if(-1 != user.getUserId()  && 0 != user.getUserId()){
 			sql.append(" and userId = " + user.getUserId());
 		}
 		if(0 != user.getRoleId()){

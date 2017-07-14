@@ -161,7 +161,7 @@
     }
 
     function downloadTemplate(){
-        window.open('template/userExporTemplate.xlsx');
+        window.open('../template/import_hourse_temp.xlsx');
     }
 
     function uploadFile(){
@@ -186,6 +186,9 @@
 
     }
 
+    function exportExcel(){
+        window.open('/hourse/fileExport.do');
+    }
 </script>
 </head>
 <body style="margin:1px;">
@@ -211,6 +214,8 @@
         <th   data-options="field:'monthly',width:150" >月租（元）</th>
         <th   data-options="field:'packingingLotStr',width:150" >是否有车位</th>
         <th   data-options="field:'rentingWay',width:150" >租房方式</th>
+        <th   data-options="field:'limitType',width:150" >限制方式</th>
+        <th   data-options="field:'fixtureType',width:150" >装修方式</th>
         <th   data-options="field:'brokerMobile',width:150" >经纪人手机号</th>
         <th   data-options="field:'brokerCode',width:150" >经纪人编号</th>
         <th   data-options="field:'brokerName',width:150" >经纪人姓名</th>
@@ -220,6 +225,8 @@
         <th   data-options="field:'near',width:150" >周边</th>
         <th   data-options="field:'traffic',width:150" >交通</th>
         <th   data-options="field:'description',width:150" >描述</th>
+        <th   data-options="field:'orientations',width:150" >朝向</th>
+        <th   data-options="field:'floor',width:150" >楼层</th>
         <th   data-options="field:'recommendStr',width:150" >是否推荐</th>
         <th   data-options="field:'isLendStr',width:150" >是否已出租</th>
         <th   data-options="field:'preLendUserMobile',width:150" >预租人联系方式</th>
@@ -231,7 +238,7 @@
 </table>
 
 <div id="tb">
-    <#--<a href="javascript:exportExcel()" class="easyui-linkbutton" iconCls="icon-export" plain="true" >导出Excel表</a>-->
+    <a href="javascript:exportExcel()" class="easyui-linkbutton" iconCls="icon-export" plain="true" >导出全部数据</a>
     <a href="javascript:openUploadFileDialog()" class="easyui-linkbutton" iconCls="icon-import" plain="true" >导入Excel表</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openUploadDialog()">上传房屋图片 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改房屋出租信息</a>
@@ -376,17 +383,17 @@
     <a href="javascript:doSave()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
     <a href="javascript:closeAddDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
-<div id="dlg2" class="easyui-dialog" style="width:550px;height:150px;padding:10px 20px"
+<div id="dlg2" class="easyui-dialog" style="width:550px;height:200px;padding:10px 20px"
      closed="true" buttons="#dlg2-buttons">
     <form id="uploadForm"  method="post" enctype="multipart/form-data" >
         <table cellspacing="10px;">
-            <!-- <tr>
-                <td>上传文件</td>
-                 <td><a href="javascript:void(0)" class="easyui-linkbutton" onclick="downloadTemplate()">导入模板</a></td>
-            </tr> -->
+            <tr>
+                <td>导入模板：</td>
+                 <td><a href="javascript:void(0)" class="easyui-linkbutton" onclick="downloadTemplate()">下载模板</a></td>
+            </tr>
             <tr>
                 <td>上传文件：</td>
-                <td><input type="file" name="userUploadFile">上传文件</td>
+                <td><input type="file" name="userUploadFile"></td>
             </tr>
         </table>
     </form>

@@ -13,7 +13,7 @@ public class HourseProvider {
 		sql.append(" SELECT * ");
 		sql.append(" FROM hourse_info WHERE ");
 		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(Hourse,"hourseId","userId","hallNum","toiletNum","roomNum","monthly","kitchenNum","packingingLot"));
-		if(-1 != Hourse.getHourseId()){
+		if(-1 != Hourse.getHourseId() && 0 != Hourse.getHourseId()){
 			sql.append(" and hourseId = " + Hourse.getHourseId());
 		}
 		if(0 != Hourse.getUserId()){

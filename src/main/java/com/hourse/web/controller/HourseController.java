@@ -14,10 +14,14 @@ import com.hourse.web.util.ExcelUtil;
 import com.hourse.web.util.MapUtil;
 import com.hourse.web.util.StringUtil;
 import net.sf.json.JSONArray;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -34,6 +38,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -257,4 +263,83 @@ public class HourseController {
         return resMap;
     }
 
+    @ResponseBody
+    @RequestMapping("fileExport")
+    public Map<String,Object> fileExport(HttpServletRequest request,
+                                         HttpServletResponse response) throws ServletException,IOException {
+        Map<String, Object> resMap = new HashMap<String, Object>();
+         try{
+             List<Hourse> list = hourseService.queryList(new Hourse());
+             Workbook wb= fillHourseDataWithTemplate(list,"export_hourse_temp.xlsx");
+             response.setHeader("Content-Disposition", "attachment;filename="+new String("房屋信息.xlsx".getBytes("utf-8"),"iso8859-1"));
+             response.setContentType("application/ynd.ms-excel;charset=UTF-8");
+             OutputStream out=response.getOutputStream();
+             wb.write(out);
+             out.flush();
+             out.close();
+    }catch(Exception e){
+        e.printStackTrace();
+        resMap.put("success", false);
+        resMap.put("errorMsg", "上传失败");
+    }
+        return resMap;
+    }
+    /**
+     * 房屋excel
+     * @param list
+     * @param templateFileName
+     * @return
+     * @throws Exception
+     */
+    public Workbook fillHourseDataWithTemplate(List<Hourse> list ,
+                                               String templateFileName) throws Exception {
+        // TODO Auto-generated method stub
+        String path = ExcelUtil.class.getClassLoader().getResource("/").getPath();
+        path=path.replace("classes\\", ""); //去掉class\
+        path=path.replace("classes/", ""); //去掉class\
+        path=path.replace("WEB-INF\\", ""); //WEB-INF\
+        path=path.replace("WEB-INF/", ""); //WEB-INF\
+        InputStream inp=new FileInputStream(path+"template/"+templateFileName);
+        XSSFWorkbook wb=new XSSFWorkbook(inp);
+        Sheet sheet=wb.getSheetAt(0);
+        int rowIndex=1;
+        for(Hourse m : list){
+            Row row=sheet.createRow(rowIndex++);
+            row.createCell(0).setCellValue(m.getHourseId());
+            row.createCell(1).setCellValue(m.getUserId());
+            row.createCell(2).setCellValue(null == userService.query(m.getUserId())? "":userService.query(m.getUserId()).getUserName());
+            row.createCell(3).setCellValue(m.getHourseAddr());
+            row.createCell(4).setCellValue(m.getProvince());
+            row.createCell(5).setCellValue(m.getCity());
+            row.createCell(6).setCellValue(m.getArea());
+            row.createCell(7).setCellValue(m.getResidentialQuarters());
+            row.createCell(8).setCellValue(m.getRoomNum());
+            row.createCell(9).setCellValue(m.getToiletNum());
+            row.createCell(10).setCellValue(m.getHallNum());
+            row.createCell(11).setCellValue(m.getKitchenNum());
+            row.createCell(12).setCellValue(m.getMonthly());
+            row.createCell(13).setCellValue(m.getPackingingLot());
+            row.createCell(14).setCellValue(m.getRentingWay());
+            row.createCell(15).setCellValue(m.getLimitType());
+            row.createCell(16).setCellValue(m.getFixtureType());
+            row.createCell(17).setCellValue(m.getBrokerMobile());
+            row.createCell(18).setCellValue(m.getBrokerCode());
+            row.createCell(19).setCellValue(m.getBrokerName());
+            row.createCell(20).setCellValue(m.getAreaCovered());
+            row.createCell(21).setCellValue(m.getSquarePrice());
+            row.createCell(22).setCellValue(m.getFurniture());
+            row.createCell(23).setCellValue(m.getNear());
+            row.createCell(24).setCellValue(m.getTraffic());
+            row.createCell(25).setCellValue(m.getDescription());
+            row.createCell(26).setCellValue(m.getRecommend());
+            row.createCell(27).setCellValue(m.getIsLend());
+            row.createCell(28).setCellValue(m.getOrientations());
+            row.createCell(29).setCellValue(m.getFloor());
+            row.createCell(30).setCellValue(m.getPreLendUserMobile());
+            row.createCell(31).setCellValue(m.getNowLendUserMobile());
+            row.createCell(32).setCellValue(m.getStatus());
+        }
+
+        return wb;
+    }
 }
