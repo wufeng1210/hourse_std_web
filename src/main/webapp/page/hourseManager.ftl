@@ -189,6 +189,30 @@
     function exportExcel(){
         window.open('/hourse/fileExport.do');
     }
+    function reAnalysis(){
+        var selectedRows=$("#dia").datagrid('getSelections');
+        if(selectedRows.length==0){
+            $.messager.alert('系统提示','请选择要解析的数据');
+            return;
+        }
+        var strIds=[];
+        for(var i=0;i<selectedRows.length;i++){
+            strIds.push(selectedRows[i].hourseId);
+        }
+        var ids=strIds.join(",");
+        $.messager.confirm("系统提示","你确定要重新解析这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
+            if(r){
+                $.post("/hourse/reAnalysis.do",{dealIds:ids},function(result){
+                    if(result.success){
+                        $.messager.alert('系统提示',"您已成功重新解析<font color=red>"+result.dealNums+"</font>条数据！");
+                        $("#dia").datagrid("reload");
+                    }else{
+                        $.messager.alert('系统提示',result.errorMsg);
+                    }
+                },"json");
+            }
+        });
+    }
 </script>
 </head>
 <body style="margin:1px;">
@@ -242,6 +266,7 @@
     <a href="javascript:openUploadFileDialog()" class="easyui-linkbutton" iconCls="icon-import" plain="true" >导入Excel表</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openUploadDialog()">上传房屋图片 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openModifyDialog()">修改房屋出租信息</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="reAnalysis()">解析经纬度</a>
     <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>-->
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="doReload()">刷新 </a>
 <div>

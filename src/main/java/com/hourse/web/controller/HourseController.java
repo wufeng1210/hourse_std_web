@@ -221,10 +221,15 @@ public class HourseController {
                     String jsonStr = HttpPostHandle.httpGetDirectionOfGaode(map);
                     net.sf.json.JSONObject cityJson = net.sf.json.JSONObject.fromObject(jsonStr);
                     JSONArray jsonArray = cityJson.optJSONArray("geocodes");
-                    String[] location = jsonArray.getJSONObject(0).getString("location").split(",");
-                    System.out.println(location[0]+"--"+location[1]);
-                    hourse.setLongitude(location[0]);
-                    hourse.setLatitude(location[1]);
+                    if(jsonArray != null && jsonArray.size()>0){
+                        String[] location = jsonArray.getJSONObject(0).getString("location").split(",");
+                        System.out.println(location[0]+"--"+location[1]);
+                        hourse.setLongitude(location[0]);
+                        hourse.setLatitude(location[1]);
+                    }else{
+                        hourse.setLongitude("0");
+                        hourse.setLatitude("0");
+                    }
                     hourse.setProvince(ExcelUtil.formateCell(xssfRow.getCell(2)));
                     hourse.setCity(ExcelUtil.formateCell(xssfRow.getCell(3)));
                     hourse.setArea(ExcelUtil.formateCell(xssfRow.getCell(4)));
@@ -341,5 +346,43 @@ public class HourseController {
         }
 
         return wb;
+    }
+
+    @ResponseBody
+    @RequestMapping("reAnalysis")
+    public Map<String,Object> reAnalysis(String dealIds) {
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        try{
+            int dealNums = 0;
+            String [] ids = dealIds.split(",");
+            for(String s : ids){
+                Hourse temp = hourseService.query(Integer.valueOf(s));
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("address", temp.getHourseAddr());
+                String jsonStr = HttpPostHandle.httpGetDirectionOfGaode(map);
+                net.sf.json.JSONObject cityJson = net.sf.json.JSONObject.fromObject(jsonStr);
+                JSONArray jsonArray = cityJson.optJSONArray("geocodes");
+                if(jsonArray != null && jsonArray.size()>0){
+                    String[] location = jsonArray.getJSONObject(0).getString("location").split(",");
+                    System.out.println(location[0]+"--"+location[1]);
+                    temp.setLongitude(location[0]);
+                    temp.setLatitude(location[1]);
+                }else{
+                    temp.setLongitude("0");
+                    temp.setLatitude("0");
+                }
+                dealNums += hourseService.update(temp);
+            }
+            if(dealNums>0){
+                resMap.put("success", true);
+                resMap.put("dealNums", dealNums);
+            }else{
+                resMap.put("success", false);
+                resMap.put("errorMsg", "删除失败");
+            }
+        }catch (Exception e){
+
+        }
+        return resMap;
     }
 }
