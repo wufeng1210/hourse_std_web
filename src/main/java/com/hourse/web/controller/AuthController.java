@@ -37,7 +37,17 @@ public class AuthController {
     @Autowired
     private IUserRoleService userRoleService;
 
+    @ResponseBody
+    @RequestMapping("getAllAuth")
+    public List<Map<String,Object>> getAllAuth(User user) {
+        List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
+        try{
+            resList = userAuthService.getAuthsByParentId("-1","");
+        }catch (Exception e){
 
+        }
+        return resList;
+    }
 
     @ResponseBody
     @RequestMapping("getAuth")

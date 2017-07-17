@@ -110,7 +110,7 @@
         roleId=row.roleId;
 
         $("#dlg2").dialog("open").dialog("setTitle","角色授权");
-        url="/auth/getAuth.do?roleId="+roleId;;
+        url="/auth/getAllAuth.do";
 
         $("#tree").tree({
             lines:true,
@@ -149,7 +149,7 @@
             authArrIds.push(nodes[i].id);
         }
         var authIds=authArrIds.join(",");
-        $.post("/auth?action=auth",{authIds:authIds,roleId:roleId},function(result){
+        $.post("/role/authMenu.do",{authIds:authIds,roleId:roleId},function(result){
             if(result.success){
                 $.messager.alert('系统提示','授权成功！');
                 closeAuthDialog();
@@ -169,6 +169,7 @@
         <th field="cb" checkbox="true" align="center"></th>
         <th   data-options="field:'roleId',width:150" >角色编号</th>
         <th   data-options="field:'roleName',width:150" >角色名称</th>
+        <th   data-options="field:'roleMenu',width:250" >角色菜单</th>
         <th   data-options="field:'roleDescription',width:150" >备注</th>
         <#--<th   data-options="field:'userPassWord',width:150" >密码</th>-->
     </tr>
