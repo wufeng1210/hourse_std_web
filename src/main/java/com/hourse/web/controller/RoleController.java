@@ -6,6 +6,7 @@ import com.hourse.web.service.IUserAuthService;
 import com.hourse.web.service.IUserRoleService;
 import com.hourse.web.service.IUserService;
 import com.hourse.web.util.MapUtil;
+import com.hourse.web.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,9 @@ public class RoleController {
                 String [] id = authIds.split(",");
                 String roleMenu = "";
                 for(String s : id){
-                    roleMenu = roleMenu +userAuthService.query(Integer.valueOf(s)).getAuthName()+",";
+                    if(StringUtils.isNotBlank(s)) {
+                        roleMenu = roleMenu + userAuthService.query(Integer.valueOf(s)).getAuthName() + ",";
+                    }
                 }
                 m.put("roleMenu",roleMenu);
                 resList.add(m);

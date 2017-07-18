@@ -152,6 +152,7 @@
         $.post("/role/authMenu.do",{authIds:authIds,roleId:roleId},function(result){
             if(result.success){
                 $.messager.alert('系统提示','授权成功！');
+                $("#dia").datagrid("reload");
                 closeAuthDialog();
             }else{
                 $.messager.alert('系统提示',result.errorMsg);
