@@ -190,27 +190,32 @@
             </tr>
             <tr>
                 <td>手机号:</td>
-                <td><input type="text" id="mobile" name="mobile" class="easyui-validatebox" required="false"/></td>
+                <td><input type="text" id="mobile" name="mobile" class="easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td>姓名:</td>
-                <td><input type="text" id="NAME" name="NAME" class="easyui-validatebox" required="false"/></td>
+                <td><input type="text" id="NAME" name="NAME" class="easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td>qq:</td>
-                <td><input type="text" id="qq" name="qq" class="easyui-validatebox" required="false"/></td>
+                <td><input type="text" id="qq" name="qq" class="easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td>微信:</td>
-                <td><input type="text" id="wechat" name="wechat" class="easyui-validatebox" required="false"/></td>
+                <td><input type="text" id="wechat" name="wechat" class="easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td>昵称:</td>
-                <td><input type="text" id="nickName" name="nickName" class="easyui-validatebox" required="false"/></td>
+                <td><input type="text" id="nickName" name="nickName" class="easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td>绑定:</td>
-                <td><input type="text" id="allow" name="allow" class="easyui-validatebox" required="false"/></td>
+                <td>
+                    <select class="easyui-combobox" name="allow" id="allow" style="width:100">
+                        <option value="1">绑定</option>
+                        <option value="0">不绑定</option>
+                    </select>
+                </td>
             </tr>
         </table>
     </form>
