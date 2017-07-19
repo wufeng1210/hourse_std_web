@@ -221,7 +221,7 @@
 </head>
 <body style="margin:1px;">
 <table id="dia" class="easyui-datagrid" title="房屋表" style="width:1150px;height:470px" toolbar="#tb"
-       url="/hourse/list.do" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
+       url="/hourse/list.do?allowId=${allowId!"-1"}" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
        fit="true" idField="id">
     <thead data-options="frozen:false">
     <tr>

@@ -5,6 +5,7 @@ import com.hourse.web.http.HttpPostHandle;
 import com.hourse.web.model.ActivityInfo;
 import com.hourse.web.model.Hourse;
 import com.hourse.web.model.ImageInfo;
+import com.hourse.web.model.User;
 import com.hourse.web.model.UserRole;
 import com.hourse.web.service.IHourseService;
 import com.hourse.web.service.IImageInfoService;
@@ -31,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -66,14 +68,21 @@ public class HourseController {
 
 
     @RequestMapping("manager")
-    public String manager() {
-        return "hourseManager";
+    public ModelAndView manager(String allowId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("allowId",allowId);
+        modelAndView.setViewName("hourseManager");
+        return modelAndView;
     }
     @ResponseBody
     @RequestMapping("list")
-    public Map<String,Object> list(Hourse hourse) {
+    public Map<String,Object> list(Hourse hourse ,String allowId) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
+            User user = userService.query(Integer.valueOf(allowId));
+            if(null != user && StringUtils.equals("1",user.getAllow())){
+                hourse.setUserId(user.getUserId());
+            }
             hourse.setStatus("1");
             List<Hourse> hourseList = hourseService.queryList(hourse);
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
