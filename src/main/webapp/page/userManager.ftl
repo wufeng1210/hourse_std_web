@@ -13,9 +13,11 @@
         src="../page/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
     function doSearch(){
+        var userName = $("#s_userName").val() =="" ? -1: $("#s_userName").val();
+        var mobile = $("#s_mobile").val() =="" ? -1: $("#s_mobile").val();
         $("#dia").datagrid('load',{
-            userId:-1,
-            userName:$("#userName").val()
+            userName:userName,
+            mobile:mobile
         });
     }
     //刷新
@@ -137,7 +139,7 @@
 </head>
 <body style="margin:1px;">
 <table id="dia" class="easyui-datagrid" title="用户表" style="width:1150px;height:470px" toolbar="#tb"
-       url="/user/list.do?userId=-1" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
+       url="/user/list.do" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
        fit="true" idField="id">
     <thead data-options="frozen:false">
     <tr>
@@ -162,7 +164,8 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="doReload()">刷新 </a>
 <div>
-    &nbsp;用户名：<input type="text" name="userName" id="userName" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
+    &nbsp;用户名：<input type="text" name="s_userName" id="s_userName" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
+    &nbsp;手机号：<input type="text" name="s_mobile" id="s_mobile" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
 
     <a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 </div>
@@ -204,6 +207,10 @@
             <tr>
                 <td>昵称:</td>
                 <td><input type="text" id="nickName" name="nickName" class="easyui-validatebox" required="false"/></td>
+            </tr>
+            <tr>
+                <td>绑定:</td>
+                <td><input type="text" id="allow" name="allow" class="easyui-validatebox" required="false"/></td>
             </tr>
         </table>
     </form>

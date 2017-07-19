@@ -19,6 +19,7 @@ public class User {
     private String qq;
     private String wechat;
     private String nickName;
+    private String allow;
 
     public String getNickName() {
         return nickName;
@@ -130,5 +131,13 @@ public class User {
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
+    }
+
+    public String getAllow() {
+        return allow;
+    }
+
+    public void setAllow(String allow) {
+        this.allow = allow;
     }
 }

@@ -14,9 +14,13 @@
 <script type="text/javascript" src="../page/assets/js/LocalResizeIMG/lrz.bundle.js"></script>
 <script type="text/javascript">
     function doSearch(){
+        var hourseId = $("#s_hourseId").val() =="" ? -1: $("#s_hourseId").val();
+        var userId = $("#s_userId").val() =="" ? -1: $("#s_userId").val();
+        var hourseAddr = $("#s_hourseAddr").val() =="" ? -1: $("#s_hourseAddr").val();
         $("#dia").datagrid('load',{
-            hourseId:-1,
-            userId:$("#userId").val()
+            hourseId:hourseId,
+            userId:userId,
+            hourseAddr:hourseAddr
         });
     }
     //刷新
@@ -217,7 +221,7 @@
 </head>
 <body style="margin:1px;">
 <table id="dia" class="easyui-datagrid" title="房屋表" style="width:1150px;height:470px" toolbar="#tb"
-       url="/hourse/list.do?hourseId=-1" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
+       url="/hourse/list.do" data-options="pageSize:100,pageList:[100,200,300,400,500],pagination:true,rownumbers:true,singleSelect:true,showFooter:true,fitColumns:false"
        fit="true" idField="id">
     <thead data-options="frozen:false">
     <tr>
@@ -270,7 +274,9 @@
     <#--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删除 </a>-->
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="doReload()">刷新 </a>
 <div>
-    &nbsp;用户编号：<input type="text" name="userId" id="userId" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
+    &nbsp;房屋编号：<input type="text" name="s_hourseId" id="s_hourseId" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
+    &nbsp;用户编号：<input type="text" name="s_userId" id="s_userId" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
+    &nbsp;房屋地址：<input type="text" name="s_hourseAddr" id="s_hourseAddr" style="width:100px" onkeydown="if(event.keyCode==13) doSearch()"/>
 
     <a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 </div>

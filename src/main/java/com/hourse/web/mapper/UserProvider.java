@@ -13,12 +13,19 @@ public class UserProvider {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT * ");
 		sql.append(" FROM user_info WHERE ");
-		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(user,"userId","roleId"));
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(user,"userId","roleId","userName","mobile"));
 		if(-1 != user.getUserId()  && 0 != user.getUserId()){
 			sql.append(" and userId = " + user.getUserId());
 		}
 		if(0 != user.getRoleId()){
 			sql.append(" and roleId = " + user.getRoleId());
+		}
+		if(null !=user.getUserName()&&!StringUtils.equals("-1",user.getUserName())){
+			sql.append(" and userName like '%" + user.getUserName() + "%'");
+		}
+
+		if(null !=user.getMobile()&&!StringUtils.equals("-1",user.getMobile())){
+			sql.append(" and mobile like '%" + user.getMobile() + "%'");
 		}
 		return sql.toString();
 	}
@@ -27,12 +34,19 @@ public class UserProvider {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT count(*) ");
 		sql.append(" FROM user_info WHERE ");
-		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(user,"userId","roleId"));
-		if(-1 != user.getUserId()){
+		sql.append(SqlProviderUtil.provideConditionNotBlankWithout(user,"userId","roleId","userName","mobile"));
+		if(-1 != user.getUserId()  && 0 != user.getUserId()){
 			sql.append(" and userId = " + user.getUserId());
 		}
 		if(0 != user.getRoleId()){
 			sql.append(" and roleId = " + user.getRoleId());
+		}
+		if(null !=user.getUserName()&&!StringUtils.equals("-1",user.getUserName())){
+			sql.append(" and userName like '%" + user.getUserName() + "%'");
+		}
+
+		if(null !=user.getMobile()&&!StringUtils.equals("-1",user.getMobile())){
+			sql.append(" and mobile like '%" + user.getMobile() + "%'");
 		}
 		return sql.toString();
 	}
