@@ -92,7 +92,7 @@
                         }
                     }, "json");
                     var content = "<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src="
-                            + node.attributes.authPath + '?allowId='+ ${userInfo.userId} + "></iframe>";
+                            + node.attributes.authPath + '?nowUserId='+ ${userInfo.userId} + "></iframe>";
 
                     $("#tabs").tabs("add", {
                         title : nodetext,

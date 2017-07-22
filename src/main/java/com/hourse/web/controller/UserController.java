@@ -86,6 +86,11 @@ public class UserController {
             int saveNums = 0;
             user.setUserType("0");
             user.setSecretKey(user.getUserPassWord());
+            if(null == user.getAllowIds() || StringUtils.isBlank(user.getAllowIds()) || StringUtils.equals("0",user.getAllowIds())){
+                user.setAllowIds("0");
+            }else if(!StringUtils.endsWith(user.getAllowIds(),",")){
+                user.setAllowIds(user.getAllowIds()+",");
+            }
             if( -1 != user.getUserId()){
                 saveNums=userService.update(user);
             }else{

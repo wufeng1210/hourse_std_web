@@ -68,21 +68,21 @@ public class HourseController {
 
 
     @RequestMapping("manager")
-    public ModelAndView manager(String allowId) {
+    public ModelAndView manager(String nowUserId) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("allowId",allowId);
+        modelAndView.addObject("nowUserId",nowUserId);
         modelAndView.setViewName("hourseManager");
         return modelAndView;
     }
     @ResponseBody
     @RequestMapping("list")
-    public Map<String,Object> list(Hourse hourse ,String allowId) {
+    public Map<String,Object> list(Hourse hourse ,String nowUserId) {
         Map<String,Object> resMap = new HashMap<String, Object>();
         try{
-            User user = userService.query(Integer.valueOf(allowId));
-            if(null != user && StringUtils.equals("1",user.getAllow())){
-                hourse.setUserId(user.getUserId());
-            }
+            User user = userService.query(Integer.valueOf(nowUserId));
+//            if(null != user && StringUtils.isNotBlank(user.getAllowIds())){
+//                hourse.setUserId(user.getAllowIds());
+//            }
             hourse.setStatus("1");
             List<Hourse> hourseList = hourseService.queryList(hourse);
             List<Map<String,Object>> resList = new ArrayList<Map<String, Object>>();
@@ -97,7 +97,13 @@ public class HourseController {
                 m.put("preLendUserMobile",preLendUserMobile);
                 String nowLendUserMobile = null== h.getNowLendUserMobile()?"":h.getNowLendUserMobile();
                 m.put("nowLendUserMobile",nowLendUserMobile);
-                resList.add(m);
+                if(null != user && !StringUtils.equals("0",user.getAllowIds()) && StringUtils.isNotBlank(user.getAllowIds())){
+                    if(StringUtils.contains(user.getAllowIds(),h.getUserId()+",")){
+                        resList.add(m);
+                    }
+                }else {
+                    resList.add(m);
+                }
             }
             int total = hourseService.count(hourse);
             resMap.put("total", total);

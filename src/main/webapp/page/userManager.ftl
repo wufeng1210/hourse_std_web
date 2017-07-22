@@ -170,7 +170,7 @@
     <a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 </div>
 </div>
-<div id="dlg" class="easyui-dialog" style="width:500px;height:400px;padding:10px 20px"
+<div id="dlg" class="easyui-dialog" style="width:600px;height:400px;padding:10px 20px"
      closed="true" buttons="#dlg-buttons">
     <form id="fm" method="post">
         <table>
@@ -185,7 +185,6 @@
             <tr>
                 <td>角色名称：</td>
                 <td><input type="hidden" id="roleId" name="roleId" /><input type="text"  id="roleName" name="roleName"  readonly="readonly" class="easyui-validatebox" required="true"/></td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td colspan="2"><a href="javascript:openRoleChooseDialog()"  class="easyui-linkbutton" >选择角色</a></td>
             </tr>
             <tr>
@@ -209,13 +208,9 @@
                 <td><input type="text" id="nickName" name="nickName" class="easyui-validatebox"/></td>
             </tr>
             <tr>
-                <td>绑定:</td>
-                <td>
-                    <select class="easyui-combobox" name="allow" id="allow" style="width:100">
-                        <option value="1">绑定</option>
-                        <option value="0">不绑定</option>
-                    </select>
-                </td>
+                <td>允许查看用户ids(如:1,2,):</td>
+                <td><input type="text" id="allowIds" name="allowIds" class="easyui-validatebox"/></td>
+                <td>0:允许全部</td>
             </tr>
         </table>
     </form>

@@ -18,7 +18,7 @@ public class HourseProvider {
 			sql.append(" and hourseId = " + Hourse.getHourseId());
 		}
 		if(-1 != Hourse.getUserId() && 0 != Hourse.getUserId()){
-			sql.append(" and userId = " + Hourse.getUserId());
+			sql.append(" and userId in (" + Hourse.getUserId() + ")");
 		}
 		if(null !=Hourse.getHourseAddr()&&!StringUtils.equals("-1",Hourse.getHourseAddr())){
 			sql.append(" and hourseAddr like '%" + Hourse.getHourseAddr() + "%'");
@@ -35,7 +35,7 @@ public class HourseProvider {
 			sql.append(" and hourseId = " + Hourse.getHourseId());
 		}
 		if(-1 != Hourse.getUserId() && 0 != Hourse.getUserId()){
-			sql.append(" and userId = " + Hourse.getUserId());
+			sql.append(" and userId in (" + Hourse.getUserId() + ")");
 		}
 		if(null !=Hourse.getHourseAddr()&&!StringUtils.equals("-1",Hourse.getHourseAddr())){
 			sql.append(" and hourseAddr like '%" + Hourse.getHourseAddr() + "%'");
