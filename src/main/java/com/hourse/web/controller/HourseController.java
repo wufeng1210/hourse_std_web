@@ -285,12 +285,23 @@ public class HourseController {
 
     @ResponseBody
     @RequestMapping("fileExport")
-    public Map<String,Object> fileExport(HttpServletRequest request,
-                                         HttpServletResponse response) throws ServletException,IOException {
+    public Map<String,Object> fileExport(String nowUserId,
+            HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         Map<String, Object> resMap = new HashMap<String, Object>();
          try{
+             List<Hourse> excelList = new ArrayList<Hourse>();
              List<Hourse> list = hourseService.queryList(new Hourse());
-             Workbook wb= fillHourseDataWithTemplate(list,"export_hourse_temp.xlsx");
+             for(Hourse h : list) {
+                 User user = userService.query(Integer.valueOf(nowUserId));
+                 if (null != user && !StringUtils.equals("0", user.getAllowIds()) && StringUtils.isNotBlank(user.getAllowIds())) {
+                     if (StringUtils.contains(user.getAllowIds(), h.getUserId() + ",")) {
+                         excelList.add(h);
+                     }
+                 } else {
+                     excelList.add(h);
+                 }
+             }
+             Workbook wb= fillHourseDataWithTemplate(excelList,"export_hourse_temp.xlsx");
              response.setHeader("Content-Disposition", "attachment;filename="+new String("房屋信息.xlsx".getBytes("utf-8"),"iso8859-1"));
              response.setContentType("application/ynd.ms-excel;charset=UTF-8");
              OutputStream out=response.getOutputStream();

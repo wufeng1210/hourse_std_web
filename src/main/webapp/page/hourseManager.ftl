@@ -191,7 +191,7 @@
     }
 
     function exportExcel(){
-        window.open('/hourse/fileExport.do');
+        window.open('/hourse/fileExport.do?nowUserId='+${nowUserId!"-1"});
     }
     function reAnalysis(){
         var selectedRows=$("#dia").datagrid('getSelections');
