@@ -261,13 +261,13 @@ public class HourseController {
                         hourse.setBrokerMobile(new DecimalFormat("#").format(Double.parseDouble(brokerMobile)));
                     }
                     hourse.setBrokerName(ExcelUtil.formateCell(xssfRow.getCell(14)));
-                    hourse.setAreaCovered(ExcelUtil.formateCell(xssfRow.getCell(15)));
-                    hourse.setSquarePrice(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(16)))));
-                    hourse.setFurniture(ExcelUtil.formateCell(xssfRow.getCell(17)));
-                    hourse.setNear(ExcelUtil.formateCell(xssfRow.getCell(18)));
-                    hourse.setTraffic(ExcelUtil.formateCell(xssfRow.getCell(19)));
-                    hourse.setOrientations(ExcelUtil.formateCell(xssfRow.getCell(20)));
-                    hourse.setFloor(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(21)))));
+                    hourse.setAreaCovered("0");
+                    hourse.setSquarePrice("0");
+                    hourse.setFurniture(ExcelUtil.formateCell(xssfRow.getCell(15)));
+                    hourse.setNear(ExcelUtil.formateCell(xssfRow.getCell(16)));
+                    hourse.setTraffic(ExcelUtil.formateCell(xssfRow.getCell(17)));
+                    hourse.setOrientations(ExcelUtil.formateCell(xssfRow.getCell(18)));
+                    hourse.setFloor(String.valueOf((int)Double.parseDouble(ExcelUtil.formateCell(xssfRow.getCell(19)))));
                     int saveNums = 0;
                     saveNums=hourseService.save(hourse);
                     successNums += saveNums+1;
