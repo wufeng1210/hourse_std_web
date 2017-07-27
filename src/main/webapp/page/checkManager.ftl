@@ -109,7 +109,8 @@
         var row=selectedRows[0];
         $("#dlgCheck").dialog("open").dialog("setTitle","审核房屋信息");
         $("#fmCheck").form("load",row);
-        $("#dlgCheck input").attr("readonly","readonly");
+        $("#dlgCheck input[name=userId]").attr("readonly","readonly");
+        $("#dlgCheck input[name=userName]").attr("readonly","readonly");
         //alert(row.hourseId);
         url="/check/saveOrUpdate.do?hourseId="+row.hourseId;
     }
